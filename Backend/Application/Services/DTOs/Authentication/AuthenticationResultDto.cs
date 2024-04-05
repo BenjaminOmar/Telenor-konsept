@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Application.Services.Authentication
 {
-    public record AuthenticationResult(
+    public record AuthenticationResultDto(
         Guid Id,
         string FirstName,
         string LastName,
