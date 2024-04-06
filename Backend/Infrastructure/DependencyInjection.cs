@@ -27,8 +27,7 @@ namespace Infrastructure
             });
 
             services.AddIdentityCore<User>()
-                .AddEntityFrameworkStores<DataContext>()
-                .AddApiEndpoints();
+                .AddEntityFrameworkStores<DataContext>();
             
             return services;
         }
@@ -42,6 +41,7 @@ namespace Infrastructure
         {
             services.AddAuthentication()
                 .AddBearerToken(IdentityConstants.BearerScheme);
+            services.AddIdentityApiEndpoints<User>();
 
             services.AddAuthorization();
             
