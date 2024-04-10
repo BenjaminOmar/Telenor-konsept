@@ -1,6 +1,5 @@
 using Application;
 using Infrastructure;
-using Infrastructure.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,7 +25,6 @@ var app = builder.Build();
     app.UseAuthentication();
     app.UseAuthorization();
     app.UseHttpsRedirection();
-    app.MapIdentityApi<User>();
     app.MapControllers();
     app.Run();
 }
