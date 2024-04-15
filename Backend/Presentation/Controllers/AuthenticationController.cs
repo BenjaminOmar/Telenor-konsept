@@ -23,7 +23,7 @@ namespace Presentation.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            var result = authenticationService.Login(request.Username, request.Password);
+            var result = await authenticationService.Login(request.Username, request.Password);
 
             return Ok(new AuthenticationResponse(result.Id, result.FirstName, result.LastName, result.Email, result.Token));
         }

@@ -19,8 +19,10 @@ namespace Application.Services.Authentication
             return new AuthenticationResultDto(Guid.NewGuid(), "firstName", "lastName", "email", "token");
         }
 
-        public AuthenticationResultDto Login(string username, string password)
+        public async Task<AuthenticationResultDto> Login(string username, string password)
         {
+            var user = await _userRepository.GetUser(username);
+            
             return new AuthenticationResultDto(Guid.NewGuid(), "firstName", "lastName", "email", "token");
         }
     }
