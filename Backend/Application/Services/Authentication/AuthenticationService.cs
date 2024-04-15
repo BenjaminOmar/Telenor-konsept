@@ -7,12 +7,12 @@ namespace Application.Services.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {
-        public AuthenticationResultDto Register(string firstName, string lastName, string email, string password)
+        public AuthenticationResultDto Register(string username, string name, string email, string password)
         {
             return new AuthenticationResultDto(Guid.NewGuid(), "firstName", "lastName", "email", "token");
         }
 
-        public AuthenticationResultDto Login(string email, string password)
+        public AuthenticationResultDto Login(string username, string password)
         {
             return new AuthenticationResultDto(Guid.NewGuid(), "firstName", "lastName", "email", "token");
         }
