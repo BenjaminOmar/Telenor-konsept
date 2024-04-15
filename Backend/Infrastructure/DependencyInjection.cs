@@ -1,4 +1,6 @@
+using Application.RepositoryInterfaces;
 using Infrastructure.Context;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +25,8 @@ namespace Infrastructure
         
         private static IServiceCollection AddRepositories(IServiceCollection services)
         {
+            services.AddScoped<IUserRepository, UserRepository>();
+            
             return services;
         }
         
