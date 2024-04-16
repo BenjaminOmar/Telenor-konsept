@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.RepositoryInterfaces;
+using Domain.Helpers;
 
 namespace Application.Services.Authentication
 {
@@ -18,12 +19,19 @@ namespace Application.Services.Authentication
         {
             return new AuthenticationResultDto(Guid.NewGuid(), "firstName", "lastName", "email", "token");
         }
-
-        public async Task<AuthenticationResultDto> Login(string username, string password)
+        
+        
+        public async Task<Result<AuthenticationResultDto>> Login(string username, string password)
         {
             var user = await _userRepository.GetUser(username);
+
+            if (user is null)
+            {
+                return Result<AuthenticationResultDto>.Failure("Bruker ikke funnet", 404);
+            }
             
-            return new AuthenticationResultDto(Guid.NewGuid(), "firstName", "lastName", "email", "token");
+            var authResult = new AuthenticationResultDto(Guid.NewGuid(), "firstName", "lastName", "email", "token");
+            return Result<AuthenticationResultDto>.Success(authResult);
         }
     }
 }

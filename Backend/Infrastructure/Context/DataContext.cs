@@ -12,10 +12,9 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK_UserId");
-            
             entity.Property(e => e.Id).HasColumnName("UserId");
-            
             entity.ToTable("user");
+            entity.HasIndex(u => u.Username).IsUnique();
         });
     }
 }

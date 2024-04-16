@@ -25,7 +25,17 @@ namespace Presentation.Controllers
         {
             var result = await authenticationService.Login(request.Username, request.Password);
 
-            return Ok(new AuthenticationResponse(result.Id, result.FirstName, result.LastName, result.Email, result.Token));
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+
+            if (result.ErrorCode == 404)
+            {
+                return NotFound(result.ErrorMessage);
+            }
+
+            return BadRequest(result.ErrorMessage);
         }
     }
 }
