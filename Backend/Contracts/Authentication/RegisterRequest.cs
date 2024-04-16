@@ -4,5 +4,6 @@ namespace Contracts.Authentication
         string Username,
         string Name,
         string Email,
+        string PhoneNumber,
         string Password);
 }

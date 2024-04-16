@@ -1,8 +1,9 @@
 using Domain.Entities;
+using Infrastructure.Repositories;
 
 namespace Application.RepositoryInterfaces;
 
-public interface IUserRepository
+public interface IUserRepository : IBaseRepository<User>
 {
-    Task<User?> GetUser(string username);
+    Task<User?> GetUser(string username, string password);
 }

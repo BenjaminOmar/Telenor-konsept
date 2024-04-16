@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 namespace Application.Services.Authentication
 {
     public record AuthenticationResultDto(
-        Guid Id,
-        string FirstName,
-        string LastName,
-        string Email,
-        string Token);
+        string Username,
+        string Password);
 }

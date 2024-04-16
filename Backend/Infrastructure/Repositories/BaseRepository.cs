@@ -1,9 +1,14 @@
+using Application.RepositoryInterfaces;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories;
 
-public abstract class BaseRepository<T> where T : class
+public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
 {
     private readonly DataContext _context;
 
@@ -12,33 +17,36 @@ public abstract class BaseRepository<T> where T : class
         _context = context;
     }
 
-    public void Add(T entity)
+    public async Task Add(T entity)
     {
-        _context.Set<T>().Add(entity);
+        await _context.Set<T>().AddAsync(entity);
+        await SaveChanges();
     }
 
-    public IEnumerable<T>? GetAll()
+    public async Task<IEnumerable<T>> GetAll()
     {
-        return _context.Set<T>().ToList();
+        return await _context.Set<T>().ToListAsync();
     }
 
-    public T? GetById(Guid id)
+    public async Task<T?> GetById(Guid id)
     {
-        return _context.Set<T>().Find(id);
+        return await _context.Set<T>().FindAsync(id);
     }
 
-    public void Update(T entity)
+    public async Task Update(T entity)
     {
         _context.Entry(entity).State = EntityState.Modified;
+        await SaveChanges();
     }
 
-    public void Delete(T entity)
+    public async Task Delete(T entity)
     {
         _context.Set<T>().Remove(entity);
+        await SaveChanges();
     }
 
-    public void SaveChanges()
+    public async Task SaveChanges()
     {
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }

@@ -15,9 +15,14 @@ namespace Presentation.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            var result = authenticationService.Register(request.Username, request.Name, request.Email, request.Password);
+            var result = await authenticationService.Register(request.Username, request.Name, request.Email, request.PhoneNumber, request.Password);
 
-            return Ok(new AuthenticationResponse(result.Id, result.FirstName, result.LastName, result.Email, result.Token));
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.ErrorMessage);
         }
 
         [HttpPost("login")]
