@@ -25,7 +25,7 @@ namespace Application.Services.Authentication
                 return Result<AuthenticationResultDto>.Failure("Brukernavnet er allerede i bruk", 400);
             }
 
-            if (await _userRepository.CheckRoleExists(role))
+            if (!await _userRepository.CheckRoleExists(role))
             {
                 return Result<AuthenticationResultDto>.Failure("Rollen eksisterer ikke", 400);
             }
@@ -53,7 +53,7 @@ namespace Application.Services.Authentication
 
             await _userRepository.Add(user);
 
-            var authResult = new AuthenticationResultDto(user.Username, user.Password, user.Role.Name);
+            var authResult = new AuthenticationResultDto(user.Username, user.Password, user.RoleId.ToString());
             return Result<AuthenticationResultDto>.Success(authResult);
         }
 
@@ -80,7 +80,7 @@ namespace Application.Services.Authentication
                 return Result<AuthenticationResultDto>.Failure("Brukeren er slettet", 401);
             }
 
-            var authResult = new AuthenticationResultDto(user.Username, user.Password, user.Role.Name);
+            var authResult = new AuthenticationResultDto(user.Username, user.Password, user.RoleId.ToString());
             return Result<AuthenticationResultDto>.Success(authResult);
         }
 
