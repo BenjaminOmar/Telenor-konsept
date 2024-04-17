@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Application.RepositoryInterfaces;
 using Domain.Entities;
@@ -19,6 +20,18 @@ namespace Application.Services.Authentication
 
         public async Task<Result<AuthenticationResultDto>> Register(string username, string name, string email, string phoneNumber, string password)
         {
+            if (await CheckUserNameExists(username))
+            {
+                return Result<AuthenticationResultDto>.Failure("Brukernavnet er allerede i bruk", 400);
+            }
+
+            string passwordMessage = CheckPasswordStrength(password);
+
+            if (passwordMessage != "")
+            {
+                return Result<AuthenticationResultDto>.Failure(passwordMessage, 400);
+            }
+
             var user = new User
             {
                 Id = Guid.NewGuid(),
@@ -63,6 +76,46 @@ namespace Application.Services.Authentication
 
             var authResult = new AuthenticationResultDto(user.Username, user.Password);
             return Result<AuthenticationResultDto>.Success(authResult);
+        }
+
+
+        /// <summary>
+        /// Checks the strength of a password and returns a message indicating any shortcomings.
+        /// </summary>
+        /// <param name="password">The password to check for strength.</param>
+        /// <returns>
+        /// A string message detailing the issues found with the password. If the password fails the
+        /// basic length requirement, it returns a message indicating that the password must be at least
+        /// 8 characters long. If the password meets the length requirement but lacks any letters, it
+        /// returns a message stating that the password must contain at least one letter. If the password
+        /// passes all checks, an empty string is returned.
+        /// </returns>
+        private static string CheckPasswordStrength(string password)
+        {
+            StringBuilder sb = new();
+
+            if (!password.Any(c => char.IsLetter(c)))
+            {
+                sb.Append("Passord må inneholde minst en bokstav");
+            }
+
+            if (password.Length < 8)
+            {
+                sb.Clear();
+                sb.Append("Passord må være minst 8 tegn langt");
+            }
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Method to check if a username already exists in the database.
+        /// </summary>
+        /// <param name="username">Username to be checked</param>
+        /// <returns>bool</returns>
+        private async Task<bool> CheckUserNameExists(string username)
+        {
+            return await _userRepository.CheckUserExists(username);
         }
     }
 }

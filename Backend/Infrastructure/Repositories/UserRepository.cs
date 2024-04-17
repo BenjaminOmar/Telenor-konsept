@@ -17,6 +17,16 @@ public class UserRepository : BaseRepository<User>, IUserRepository
     /// <summary>
     /// Retrieves a user by username asynchronously.
     /// </summary>
+    /// <param name="username">username to check</param>
+    /// <returns>bool</returns>
+    public Task<bool> CheckUserExists(string username)
+    {
+        return _context.Users.AnyAsync(x => x.Username == username);
+    }
+
+    /// <summary>
+    /// Retrieves a user by username asynchronously.
+    /// </summary>
     /// <param name="username">The target username.</param>
     /// <returns>A User if found; otherwise, null.</returns>
     public async Task<User?> GetUser(string username)
