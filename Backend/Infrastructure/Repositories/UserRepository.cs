@@ -19,9 +19,9 @@ public class UserRepository : BaseRepository<User>, IUserRepository
     /// </summary>
     /// <param name="username">The target username.</param>
     /// <returns>A User if found; otherwise, null.</returns>
-    public async Task<User?> GetUser(string username, string password)
+    public async Task<User?> GetUser(string username)
     {
-        return await _context.Users.FirstOrDefaultAsync(x => x.Username == username && x.Password == password);
+        return await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
     }
 
 }

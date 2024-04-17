@@ -26,7 +26,7 @@ namespace Application.Services.Authentication
                 Name = name,
                 Email = email,
                 PhoneNumber = phoneNumber,
-                Password = password,
+                Password = BCrypt.Net.BCrypt.HashPassword(password),
             };
 
             user.CreatedBy = user.Id;
@@ -41,11 +41,24 @@ namespace Application.Services.Authentication
 
         public async Task<Result<AuthenticationResultDto>> Login(string username, string password)
         {
-            var user = await _userRepository.GetUser(username, password);
+
+            var user = await _userRepository.GetUser(username);
 
             if (user is null)
             {
                 return Result<AuthenticationResultDto>.Failure("Bruker ikke funnet", 404);
+            }
+
+            bool validPassword = BCrypt.Net.BCrypt.Verify(password, user.Password);
+
+            if (!validPassword)
+            {
+                return Result<AuthenticationResultDto>.Failure("Bruker ikke funnet", 401);
+            }
+
+            if (user.IsDeleted)
+            {
+                return Result<AuthenticationResultDto>.Failure("Brukeren er slettet", 401);
             }
 
             var authResult = new AuthenticationResultDto(user.Username, user.Password);
