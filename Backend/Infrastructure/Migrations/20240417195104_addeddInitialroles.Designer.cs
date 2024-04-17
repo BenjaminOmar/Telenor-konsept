@@ -4,6 +4,7 @@ using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240417195104_addeddInitialroles")]
+    partial class addeddInitialroles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,16 +63,16 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("ccafb929-aa82-4981-96f9-53864b688c89"),
-                            CreatedBy = new Guid("2d718eaa-7518-4c5b-8fe0-241bd2b69b0c"),
-                            CreatedOn = new DateTime(2024, 4, 17, 19, 54, 49, 157, DateTimeKind.Utc).AddTicks(8910),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "User"
                         },
                         new
                         {
                             Id = new Guid("dd5a13da-11e4-4554-a697-76a4102fd72e"),
-                            CreatedBy = new Guid("2d718eaa-7518-4c5b-8fe0-241bd2b69b0c"),
-                            CreatedOn = new DateTime(2024, 4, 17, 19, 54, 49, 157, DateTimeKind.Utc).AddTicks(8910),
+                            CreatedBy = new Guid("00000000-0000-0000-0000-000000000000"),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Admin"
                         });

@@ -34,4 +34,17 @@ public class UserRepository : BaseRepository<User>, IUserRepository
         return await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
     }
 
+    /// <summary>
+    /// Checks if a role exists in the database based on the provided role ID.
+    /// </summary>
+    /// <param name="roleId">The unique identifier of the role to be checked.</param>
+    /// <returns>
+    /// A task that represents the asynchronous operation, containing a boolean result.
+    /// True if the role exists; otherwise, false.
+    /// </returns>
+    public Task<bool> CheckRoleExists(Guid roleId)
+    {
+        return _context.Roles.AnyAsync(x => x.Id == roleId);
+    }
+
 }

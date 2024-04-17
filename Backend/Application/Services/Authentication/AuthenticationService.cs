@@ -18,11 +18,16 @@ namespace Application.Services.Authentication
             _userRepository = userRepository;
         }
 
-        public async Task<Result<AuthenticationResultDto>> Register(string username, string name, string email, string phoneNumber, string password)
+        public async Task<Result<AuthenticationResultDto>> Register(string username, string name, string email, string phoneNumber, string password, Guid role)
         {
-            if (await CheckUserNameExists(username))
+            if (await _userRepository.CheckUserExists(username))
             {
                 return Result<AuthenticationResultDto>.Failure("Brukernavnet er allerede i bruk", 400);
+            }
+
+            if (await _userRepository.CheckRoleExists(role))
+            {
+                return Result<AuthenticationResultDto>.Failure("Rollen eksisterer ikke", 400);
             }
 
             string passwordMessage = CheckPasswordStrength(password);
@@ -40,6 +45,7 @@ namespace Application.Services.Authentication
                 Email = email,
                 PhoneNumber = phoneNumber,
                 Password = BCrypt.Net.BCrypt.HashPassword(password),
+                RoleId = role
             };
 
             user.CreatedBy = user.Id;
@@ -47,7 +53,7 @@ namespace Application.Services.Authentication
 
             await _userRepository.Add(user);
 
-            var authResult = new AuthenticationResultDto(user.Username, user.Password);
+            var authResult = new AuthenticationResultDto(user.Username, user.Password, user.Role.Name);
             return Result<AuthenticationResultDto>.Success(authResult);
         }
 
@@ -74,7 +80,7 @@ namespace Application.Services.Authentication
                 return Result<AuthenticationResultDto>.Failure("Brukeren er slettet", 401);
             }
 
-            var authResult = new AuthenticationResultDto(user.Username, user.Password);
+            var authResult = new AuthenticationResultDto(user.Username, user.Password, user.Role.Name);
             return Result<AuthenticationResultDto>.Success(authResult);
         }
 
@@ -106,16 +112,6 @@ namespace Application.Services.Authentication
             }
 
             return sb.ToString();
-        }
-
-        /// <summary>
-        /// Method to check if a username already exists in the database.
-        /// </summary>
-        /// <param name="username">Username to be checked</param>
-        /// <returns>bool</returns>
-        private async Task<bool> CheckUserNameExists(string username)
-        {
-            return await _userRepository.CheckUserExists(username);
         }
     }
 }

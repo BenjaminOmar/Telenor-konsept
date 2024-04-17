@@ -15,7 +15,7 @@ namespace Presentation.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            var result = await authenticationService.Register(request.Username, request.Name, request.Email, request.PhoneNumber, request.Password);
+            var result = await authenticationService.Register(request.Username, request.Name, request.Email, request.PhoneNumber, request.Password, request.RoleId);
 
             if (result.IsSuccess)
             {

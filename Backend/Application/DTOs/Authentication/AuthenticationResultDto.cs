@@ -7,5 +7,6 @@ namespace Application.Services.Authentication
 {
     public record AuthenticationResultDto(
         string Username,
-        string Password);
+        string Password,
+        string RoleName);
 }

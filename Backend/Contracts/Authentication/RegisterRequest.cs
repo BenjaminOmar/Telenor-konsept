@@ -5,5 +5,6 @@ namespace Contracts.Authentication
         string Name,
         string Email,
         string PhoneNumber,
-        string Password);
+        string Password,
+        Guid RoleId);
 }
