@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Services.Authentication;
 using Contracts.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
@@ -12,6 +13,7 @@ namespace Presentation.Controllers
     [Route("api/auth")]
     public class AuthenticationController(IAuthenticationService authenticationService) : ControllerBase
     {
+        [Authorize]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
@@ -22,7 +24,7 @@ namespace Presentation.Controllers
                 return Ok(result);
             }
 
-            return BadRequest(result.ErrorMessage);
+            return BadRequest(result);
         }
 
         [HttpPost("login")]
@@ -32,15 +34,17 @@ namespace Presentation.Controllers
 
             if (result.IsSuccess)
             {
-                return Ok(result);
+                Response.Cookies.Append("AccessToken", result.Value.AccessToken, result.Value.AccessTokenOptions);
+                
+                return Ok("Gyldig innlogging");
             }
 
             if (result.ErrorCode == 404)
             {
-                return NotFound(result.ErrorMessage);
+                return NotFound(result);
             }
 
-            return BadRequest(result.ErrorMessage);
+            return BadRequest(result);
         }
     }
 }

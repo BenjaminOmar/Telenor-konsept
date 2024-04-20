@@ -8,7 +8,7 @@ namespace Application.Services.Authentication
 {
     public interface IAuthenticationService
     {
-        Task<Result<AuthenticationResultDto>> Register(string username, string name, string email, string phoneNumber, string password, Guid role);
+        Task<Result<bool>> Register(string username, string name, string email, string phoneNumber, string password, Guid role);
         Task<Result<AuthenticationResultDto>> Login(string username, string password);
     }
 }

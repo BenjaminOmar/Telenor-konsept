@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Application.RepositoryInterfaces;
 using Domain.Entities;
 using Domain.Helpers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Application.Services.Authentication
@@ -23,23 +24,23 @@ namespace Application.Services.Authentication
             _environment = environment;
         }
 
-        public async Task<Result<AuthenticationResultDto>> Register(string username, string name, string email, string phoneNumber, string password, Guid role)
+        public async Task<Result<bool>> Register(string username, string name, string email, string phoneNumber, string password, Guid role)
         {
             if (await _userRepository.CheckUserExists(username))
             {
-                return Result<AuthenticationResultDto>.Failure("Brukernavnet er allerede i bruk", 400);
+                return Result<bool>.Failure("Brukernavnet er allerede i bruk", 400);
             }
 
             if (!await _userRepository.CheckRoleExists(role))
             {
-                return Result<AuthenticationResultDto>.Failure("Rollen eksisterer ikke", 400);
+                return Result<bool>.Failure("Rollen eksisterer ikke", 400);
             }
 
             string passwordMessage = CheckPasswordStrength(password);
 
             if (passwordMessage != "")
             {
-                return Result<AuthenticationResultDto>.Failure(passwordMessage, 400);
+                return Result<bool>.Failure(passwordMessage, 400);
             }
 
             var user = new User
@@ -57,9 +58,8 @@ namespace Application.Services.Authentication
             user.CreatedOn = DateTime.UtcNow;
 
             await _userRepository.Add(user);
-
-            var authResult = new AuthenticationResultDto(user.Username, user.Password, user.RoleId.ToString());
-            return Result<AuthenticationResultDto>.Success(authResult);
+            
+            return Result<bool>.Success(true);
         }
 
 
@@ -87,7 +87,9 @@ namespace Application.Services.Authentication
 
             var jwt = CreateJwt(user);
 
-            var authResult = new AuthenticationResultDto(user.Username, user.Password, user.RoleId.ToString());
+            var accessTokenOptions = AccessTokenOptions();
+
+            var authResult = new AuthenticationResultDto(jwt, accessTokenOptions);
             return Result<AuthenticationResultDto>.Success(authResult);
         }
 
@@ -117,6 +119,20 @@ namespace Application.Services.Authentication
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
 
             return jwtTokenHandler.WriteToken(token);
+        }
+        
+        private static CookieOptions AccessTokenOptions()
+        {
+            var accessTokenOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTime.UtcNow.AddMinutes(45),
+                Path = "/"
+            };
+            
+            return accessTokenOptions;
         }
 
 
