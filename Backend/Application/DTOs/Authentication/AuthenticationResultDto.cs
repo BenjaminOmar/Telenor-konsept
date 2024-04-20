@@ -2,13 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Application.Services.Authentication
 {
-    public record AuthenticationResultDto(
-        Guid Id,
-        string FirstName,
-        string LastName,
-        string Email,
-        string Token);
+    public record AuthenticationResultDto(string AccessToken, CookieOptions AccessTokenOptions);
 }

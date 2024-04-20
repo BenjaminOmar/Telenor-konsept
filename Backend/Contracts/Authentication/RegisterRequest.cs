@@ -1,8 +1,10 @@
 namespace Contracts.Authentication
 {
     public record RegisterRequest(
-        string FirstName,
-        string LastName,
+        string Username,
+        string Name,
         string Email,
-        string Password);
+        string PhoneNumber,
+        string Password,
+        Guid RoleId);
 }

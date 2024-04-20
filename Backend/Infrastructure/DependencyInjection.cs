@@ -1,4 +1,8 @@
+using Application.RepositoryInterfaces;
+using Domain.Helpers;
+using Infrastructure.Configuration;
 using Infrastructure.Context;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +16,8 @@ namespace Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             AddRepositories(services);
+
+            AddConfiguration(services, configuration);
             
             services.AddDbContext<DataContext>(options =>
             {
@@ -20,9 +26,18 @@ namespace Infrastructure
             
             return services;
         }
+
+        private static IServiceCollection AddConfiguration(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddSingleton<IEnvironmentSettings>(provider => new EnvironmentSettings(configuration));
+
+            return services;
+        }
         
         private static IServiceCollection AddRepositories(IServiceCollection services)
         {
+            services.AddScoped<IUserRepository, UserRepository>();
+            
             return services;
         }
         

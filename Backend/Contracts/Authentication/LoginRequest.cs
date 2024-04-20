@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 namespace Contracts.Authentication
 {
     public record LoginRequest(
-    string Email,
+    string Username,
     string Password);
 }

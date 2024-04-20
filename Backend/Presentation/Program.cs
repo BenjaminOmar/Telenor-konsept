@@ -1,13 +1,15 @@
 using Application;
 using Infrastructure;
+using Presentation.Config;
 
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
+    builder.Services.AddApplication();
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddUserValidation(builder.Configuration);
     builder.Services.AddSwaggerGen(options =>
     {
         options.CustomSchemaIds(type => type.ToString());

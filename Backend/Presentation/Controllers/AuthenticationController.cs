@@ -4,35 +4,47 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Services.Authentication;
 using Contracts.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers
 {
     [ApiController]
     [Route("api/auth")]
-    public class AuthenticationController : ControllerBase
+    public class AuthenticationController(IAuthenticationService authenticationService) : ControllerBase
     {
-        private readonly IAuthenticationService _authenticationService;
-
-        public AuthenticationController(IAuthenticationService authenticationService)
-        {
-            _authenticationService = authenticationService;
-        }
-
+        [Authorize]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            var result = _authenticationService.Register(request.FirstName, request.LastName, request.Email, request.Password);
+            var result = await authenticationService.Register(request.Username, request.Name, request.Email, request.PhoneNumber, request.Password, request.RoleId);
 
-            return Ok(new AuthenticationResponse(result.Id, result.FirstName, result.LastName, result.Email, result.Token));
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
-            var result = _authenticationService.Login(request.Email, request.Password);
+            var result = await authenticationService.Login(request.Username, request.Password);
 
-            return Ok(new AuthenticationResponse(result.Id, result.FirstName, result.LastName, result.Email, result.Token));
+            if (result.IsSuccess)
+            {
+                Response.Cookies.Append("AccessToken", result.Value.AccessToken, result.Value.AccessTokenOptions);
+                
+                return Ok("Gyldig innlogging");
+            }
+
+            if (result.ErrorCode == 404)
+            {
+                return NotFound(result);
+            }
+
+            return BadRequest(result);
         }
     }
 }

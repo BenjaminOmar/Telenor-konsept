@@ -11,6 +11,12 @@ namespace Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+            AddServices(services);
+            return services;
+        }
+        
+        private static IServiceCollection AddServices(IServiceCollection services)
+        {
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             return services;
         }
