@@ -62,7 +62,12 @@ namespace Application.Services.Authentication
             return Result<bool>.Success(true);
         }
 
-
+        /// <summary>
+        /// Checks if user is signed in. if so, the user recieves a jwt as a bearer token
+        /// </summary>
+        /// <param name="username">Username of the user trying to sign in</param>
+        /// <param name="password">Password of the user trying to sign in</param>
+        /// <returns>jwt token and its options</returns>
         public async Task<Result<AuthenticationResultDto>> Login(string username, string password)
         {
 
@@ -92,7 +97,16 @@ namespace Application.Services.Authentication
             var authResult = new AuthenticationResultDto(jwt, accessTokenOptions);
             return Result<AuthenticationResultDto>.Success(authResult);
         }
-
+        
+        /// <summary>
+        /// Method creates a jwt token with the users:
+        /// - Username
+        /// - UserId
+        /// - Role
+        /// as claims
+        /// </summary>
+        /// <param name="user">user object</param>
+        /// <returns>Jwt token as string</returns>
         private string CreateJwt(User user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
@@ -121,6 +135,10 @@ namespace Application.Services.Authentication
             return jwtTokenHandler.WriteToken(token);
         }
         
+        /// <summary>
+        /// Creates the cookieoptions for a jwt token
+        /// </summary>
+        /// <returns>cookieotions object with the configured options</returns>
         private static CookieOptions AccessTokenOptions()
         {
             var accessTokenOptions = new CookieOptions
