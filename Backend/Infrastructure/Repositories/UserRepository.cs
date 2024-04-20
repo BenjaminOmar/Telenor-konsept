@@ -31,7 +31,9 @@ public class UserRepository : BaseRepository<User>, IUserRepository
     /// <returns>A User if found; otherwise, null.</returns>
     public async Task<User?> GetUser(string username)
     {
-        return await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
+        return await _context.Users
+            .Include(r => r.Role)
+            .FirstOrDefaultAsync(x => x.Username == username);
     }
 
     /// <summary>

@@ -1,21 +1,26 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Application.RepositoryInterfaces;
 using Domain.Entities;
 using Domain.Helpers;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Application.Services.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IEnvironmentSettings _environment;
 
-        public AuthenticationService(IUserRepository userRepository)
+        public AuthenticationService(IUserRepository userRepository, IEnvironmentSettings environment)
         {
             _userRepository = userRepository;
+            _environment = environment;
         }
 
         public async Task<Result<AuthenticationResultDto>> Register(string username, string name, string email, string phoneNumber, string password, Guid role)
@@ -80,8 +85,38 @@ namespace Application.Services.Authentication
                 return Result<AuthenticationResultDto>.Failure("Brukeren er slettet", 401);
             }
 
+            var jwt = CreateJwt(user);
+
             var authResult = new AuthenticationResultDto(user.Username, user.Password, user.RoleId.ToString());
             return Result<AuthenticationResultDto>.Success(authResult);
+        }
+
+        private string CreateJwt(User user)
+        {
+            var jwtTokenHandler = new JwtSecurityTokenHandler();
+
+            var key = Encoding.ASCII.GetBytes(_environment.JwtSecretKey);
+            ClaimsIdentity identity = new(new Claim[]
+            {
+                new (ClaimTypes.Name, user.Username),
+                new (ClaimTypes.NameIdentifier, user.Id.ToString()!),
+                new (ClaimTypes.Role, user.Role.Name)
+            });
+
+            SigningCredentials credentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
+
+            SecurityTokenDescriptor tokenDescriptor = new()
+            {
+                Subject = identity,
+                Expires = DateTime.Now.AddHours(10),
+                SigningCredentials = credentials,
+                Audience = _environment.Audience,
+                Issuer = _environment.Issuer,
+            };
+
+            var token = jwtTokenHandler.CreateToken(tokenDescriptor);
+
+            return jwtTokenHandler.WriteToken(token);
         }
 
 

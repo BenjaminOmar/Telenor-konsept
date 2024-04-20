@@ -1,4 +1,6 @@
 using Application.RepositoryInterfaces;
+using Domain.Helpers;
+using Infrastructure.Configuration;
 using Infrastructure.Context;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -14,12 +16,21 @@ namespace Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             AddRepositories(services);
+
+            AddConfiguration(services, configuration);
             
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
             
+            return services;
+        }
+
+        private static IServiceCollection AddConfiguration(IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddSingleton<IEnvironmentSettings>(provider => new EnvironmentSettings(configuration));
+
             return services;
         }
         
