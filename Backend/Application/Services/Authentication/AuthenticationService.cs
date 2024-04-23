@@ -91,10 +91,8 @@ namespace Application.Services.Authentication
             }
 
             var jwt = CreateJwt(user);
-
-            var accessTokenOptions = AccessTokenOptions();
-
-            var authResult = new AuthenticationResultDto(jwt, accessTokenOptions);
+            
+            var authResult = new AuthenticationResultDto(jwt);
             return Result<AuthenticationResultDto>.Success(authResult);
         }
         
@@ -135,25 +133,6 @@ namespace Application.Services.Authentication
             return jwtTokenHandler.WriteToken(token);
         }
         
-        /// <summary>
-        /// Creates the cookieoptions for a jwt token
-        /// </summary>
-        /// <returns>cookieotions object with the configured options</returns>
-        private static CookieOptions AccessTokenOptions()
-        {
-            var accessTokenOptions = new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.None,
-                Expires = DateTime.UtcNow.AddMinutes(45),
-                Path = "/"
-            };
-            
-            return accessTokenOptions;
-        }
-
-
         /// <summary>
         /// Checks the strength of a password and returns a message indicating any shortcomings.
         /// </summary>
