@@ -34,7 +34,7 @@ namespace Presentation.Controllers
 
             if (result.IsSuccess)
             {
-                return Ok(new { Message = "Vellykket inlogging", Token = result.Value.AccessToken});
+                return Ok(new { Message = "Vellykket innlogging", Token = result.Value.AccessToken});
             }
 
             if (result.ErrorCode == 404)
