@@ -4,38 +4,25 @@ import React from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import Dashboard from './pages/Dashboard';
 import {QueryClient, QueryClientProvider} from 'react-query';
+import Login from './pages/Login';
 
 const Stack = createNativeStackNavigator();
 
 const queryClient = new QueryClient();
 
-function App(): React.JSX.Element {
+const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack.Navigator initialRouteName="Dashboard">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Login"
+          component={Login}
+        />
       </Stack.Navigator>
     </QueryClientProvider>
   );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+};
 
 export default App;
