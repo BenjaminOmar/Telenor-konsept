@@ -62,12 +62,13 @@ const Login = () => {
 const styles = StyleSheet.create({
   root: {
     alignItems: 'center',
-    paddingTop: 90,
+    paddingTop: 100,
   },
   logo: {
     width: '80%',
     maxHeight: 250,
     maxWidth: 400,
+    marginBottom: -20,
   },
   inputContainer: {
     marginBottom: 20,
