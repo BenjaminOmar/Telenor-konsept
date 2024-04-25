@@ -91,8 +91,15 @@ namespace Application.Services.Authentication
             }
 
             var jwt = CreateJwt(user);
+
+            IdTokenDto idToken = new()
+            {
+                Name = user.Name,
+                PhoneNumber = user.PhoneNumber,
+                Email = user.Email
+            };
             
-            var authResult = new AuthenticationResultDto(jwt);
+            var authResult = new AuthenticationResultDto(jwt, idToken);
             return Result<AuthenticationResultDto>.Success(authResult);
         }
         
