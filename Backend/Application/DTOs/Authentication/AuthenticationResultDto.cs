@@ -6,5 +6,5 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.Services.Authentication
 {
-    public record AuthenticationResultDto(string AccessToken, CookieOptions AccessTokenOptions);
+    public record AuthenticationResultDto(string AccessToken, IdTokenDto IdToken);
 }

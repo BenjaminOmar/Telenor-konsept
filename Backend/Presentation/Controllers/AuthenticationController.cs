@@ -34,9 +34,7 @@ namespace Presentation.Controllers
 
             if (result.IsSuccess)
             {
-                Response.Cookies.Append("AccessToken", result.Value.AccessToken, result.Value.AccessTokenOptions);
-                
-                return Ok("Gyldig innlogging");
+                return Ok(new { Message = "Vellykket innlogging", AccessToken = result.Value.AccessToken, IdToken = result.Value.IdToken});
             }
 
             if (result.ErrorCode == 404)
