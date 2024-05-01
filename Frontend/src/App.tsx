@@ -36,9 +36,11 @@ export const Layout = () => {
                 </SafeAreaView>
               ),
               headerTitle: () => (
-                <SafeAreaView>
-                  <Image source={{uri: Logo}} style={{width: 50, height: 50}} />
-                </SafeAreaView>
+                <Image
+                  source={Logo}
+                  style={{width: 40, height: 40}}
+                  resizeMode="contain"
+                />
               ),
             }}
           />
