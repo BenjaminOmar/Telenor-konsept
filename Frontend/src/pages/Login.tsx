@@ -6,20 +6,24 @@ import {
   StyleSheet,
   useWindowDimensions,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Logo from './../../assets/images/telenor-logo-text.png';
 import CustomInput from '../components/common/inputs/CustomInput';
 import CustomButton from '../components/common/buttons/CustomButton';
 import {useState} from 'react';
+import {useAuth} from '../context/authContext';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const {onLogin} = useAuth();
 
-  const onLogin = () => {
-    console.log('Username:', username);
-    console.log('Pasword:', password);
-  };
+  const login = async () => {
+    const result = await onLogin!(username, password);
+    if (result && result.error) {
+      Alert.alert(result.errorMessage);
+  }
 
   const OnForgotPasswordPressed = () => {
     console.log('Forgot password pressed');
@@ -50,7 +54,7 @@ const Login = () => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <CustomButton onPress={onLogin} text={'Logg inn'} />
+        <CustomButton onPress={login} text={'Logg inn'} />
       </View>
       <TouchableOpacity onPress={OnForgotPasswordPressed}>
         <Text style={styles.linkText}>Glemt passord?</Text>
