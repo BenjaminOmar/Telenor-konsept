@@ -9,7 +9,7 @@ interface AuthProps {
 }
 
 const ACCESS_TOKEN = 'access_token';
-export const BaseUrl = 'https://localhost:3000/api';
+export const BaseUrl = 'http://localhost:3000/api';
 const AuthContext = createContext<AuthProps>({});
 
 export const useAuth = () => {
@@ -44,17 +44,14 @@ export const AuthProvider = ({children}: any) => {
         username,
         password,
       });
-      const token = response.data.token;
+      const token = response.data.accessToken;
       setAuthState({token, authenticated: true});
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       await AsyncStorage.setItem(ACCESS_TOKEN, token);
       return response;
     } catch (error) {
-      const axiosError = error as AxiosError;
-      console.log('--------------------');
-      console.error(axiosError.code);
-      console.error(axiosError.message);
-      console.error(axiosError.request);
+      console.error('--------------------');
+      console.error(error);
     }
   };
 
