@@ -1,5 +1,5 @@
 import {createContext, useContext, useEffect, useState} from 'react';
-import axios from 'axios';
+import axios, {AxiosError} from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface AuthProps {
@@ -50,7 +50,11 @@ export const AuthProvider = ({children}: any) => {
       await AsyncStorage.setItem(ACCESS_TOKEN, token);
       return response;
     } catch (error) {
-      console.error(error);
+      const axiosError = error as AxiosError;
+      console.log('--------------------');
+      console.error(axiosError.code);
+      console.error(axiosError.message);
+      console.error(axiosError.request);
     }
   };
 

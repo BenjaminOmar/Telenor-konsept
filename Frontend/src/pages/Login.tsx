@@ -23,7 +23,8 @@ const Login = () => {
     const result = await onLogin!(username, password);
     if (result && result.error) {
       Alert.alert(result.errorMessage);
-  }
+    }
+  };
 
   const OnForgotPasswordPressed = () => {
     console.log('Forgot password pressed');
