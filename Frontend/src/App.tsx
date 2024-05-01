@@ -1,7 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import Logo from '../assets/images/telenor-logo.png';
+import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import Login from './pages/Login';
 import {AuthProvider, useAuth} from './context/authContext';
@@ -32,6 +33,11 @@ export const Layout = () => {
               headerRight: () => (
                 <SafeAreaView>
                   <Text onPress={onLogout}>Logg ut</Text>
+                </SafeAreaView>
+              ),
+              headerTitle: () => (
+                <SafeAreaView>
+                  <Image source={{uri: Logo}} style={{width: 50, height: 50}} />
                 </SafeAreaView>
               ),
             }}
