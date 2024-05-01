@@ -1,7 +1,19 @@
 import {View, Text, TextInput, StyleSheet} from 'react-native';
 import React from 'react';
 
-const CustomInput = ({value, setValue, placeholder, secureTextEntry}) => {
+interface CustomInputProps {
+  value: string;
+  setValue: (value: string) => void;
+  placeholder: string;
+  secureTextEntry: boolean;
+}
+
+const CustomInput: React.FC<CustomInputProps> = ({
+  value,
+  setValue,
+  placeholder,
+  secureTextEntry,
+}) => {
   return (
     <View style={styles.container}>
       <TextInput
@@ -10,6 +22,7 @@ const CustomInput = ({value, setValue, placeholder, secureTextEntry}) => {
         style={styles.input}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
+        autoCapitalize="none"
       />
     </View>
   );
