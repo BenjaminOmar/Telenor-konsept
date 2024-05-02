@@ -29,20 +29,7 @@ export const Layout = () => {
           <Stack.Screen
             name="Home"
             component={Home}
-            options={{
-              headerRight: () => (
-                <SafeAreaView>
-                  <Text onPress={onLogout}>Logg ut</Text>
-                </SafeAreaView>
-              ),
-              headerTitle: () => (
-                <Image
-                  source={Logo}
-                  style={{width: 40, height: 40}}
-                  resizeMode="contain"
-                />
-              ),
-            }}
+            options={{headerShown: false}}
           />
         ) : (
           <Stack.Screen

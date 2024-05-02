@@ -5,28 +5,53 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import BusinessList from './BusinessList';
 import Tasks from './Tasks';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwsome5 from 'react-native-vector-icons/FontAwesome';
+import Header from './Header';
 
 const Tab = createBottomTabNavigator();
 
 const Home = () => {
   return (
-    <Tab.Navigator initialRouteName="Dashbord">
-      <Tab.Screen
-        name="Bedriftsliste"
-        component={BusinessList}
-        options={{headerShown: false}}
-      />
-      <Tab.Screen
-        name="Dashbord"
-        component={Dashboard}
-        options={{headerShown: false}}
-      />
-      <Tab.Screen
-        name="Oppgaver"
-        component={Tasks}
-        options={{headerShown: false}}
-      />
-    </Tab.Navigator>
+    <>
+      <Header />
+      <Tab.Navigator
+        initialRouteName="Dashbord"
+        screenOptions={{
+          tabBarShowLabel: false,
+          headerShown: false,
+          tabBarActiveTintColor: '#007AFF',
+        }}>
+        <Tab.Screen
+          name="Bedriftsliste"
+          component={BusinessList}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <Ionicons name="business" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Dashbord"
+          component={Dashboard}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <AntDesign name="dashboard" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Oppgaver"
+          component={Tasks}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <FontAwsome5 name="tasks" size={size} color={color} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </>
   );
 };
 
