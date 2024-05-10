@@ -8,7 +8,7 @@ import Tasks from './Tasks';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwsome5 from 'react-native-vector-icons/FontAwesome';
-import Header from './Header';
+import Header from '../components/header/Header';
 
 const Tab = createBottomTabNavigator();
 
