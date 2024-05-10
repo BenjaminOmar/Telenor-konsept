@@ -3,13 +3,13 @@ namespace Domain.ValueObjects;
 public class Address
 {
     private string AddressLine1 { get; }
-    private string AddressLine2 { get; }
+    private string? AddressLine2 { get; }
     private string PostCode { get; }
     private string City { get; }
     
     private Address() { }
     
-    public Address(string addressLine1, string addressLine2, string postCode, string city)
+    public Address(string addressLine1, string postCode, string city, string? addressLine2)
     {
         AddressLine1 = addressLine1 ?? throw new ArgumentNullException(nameof(addressLine1));
         AddressLine2 = addressLine2;

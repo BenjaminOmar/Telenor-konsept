@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Application.Services.Authentication;
+using Application.Services.Business;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application
@@ -18,6 +15,7 @@ namespace Application
         private static IServiceCollection AddServices(IServiceCollection services)
         {
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IBusinessService, BusinessService>();
             return services;
         }
     }

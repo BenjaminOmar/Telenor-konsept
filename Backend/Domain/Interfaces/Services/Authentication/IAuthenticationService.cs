@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Helpers;
 
+
 namespace Application.Services.Authentication
 {
     public interface IAuthenticationService
