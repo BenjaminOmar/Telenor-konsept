@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddApplication();
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddAutoMapper(typeof(Program));
     builder.Services.AddUserValidation(builder.Configuration);
     builder.Services.AddSwaggerGen(options =>
     {
