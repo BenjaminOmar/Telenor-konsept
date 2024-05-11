@@ -1,9 +1,6 @@
-using System.ComponentModel.DataAnnotations;
-using Domain.ValueObjects;
+namespace Domain.DTOs.Business;
 
-namespace Domain.Entities;
-
-public class Business : BaseEntity
+public class BusinessListResultDto
 {
     public string Name { get; set; } = null!;
 
@@ -14,6 +11,4 @@ public class Business : BaseEntity
     public string County { get; set; } = null!;
 
     public string Email { get; set; } = null!;
-    
-    public ICollection<User> Users { get; set; } = [];
 }

@@ -51,7 +51,8 @@ namespace Application.Services.Authentication
                 Email = email,
                 PhoneNumber = phoneNumber,
                 Password = BCrypt.Net.BCrypt.HashPassword(password),
-                RoleId = role
+                RoleId = role,
+                BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16")
             };
 
             user.CreatedBy = user.Id;

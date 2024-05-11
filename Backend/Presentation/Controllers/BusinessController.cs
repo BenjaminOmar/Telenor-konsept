@@ -14,6 +14,13 @@ public class BusinessController(IBusinessService businessService) : ControllerBa
     [HttpGet]
     public async Task<IActionResult> GetBusinessList()
     {
-        return Ok("test");
+        var result = await _businessService.GetBusinessList();
+
+        if (result.IsSuccess)
+        {
+            return Ok(result);
+        }
+
+        return BadRequest("Error ved henting av bedriftslisten");
     }
 }

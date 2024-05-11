@@ -13,7 +13,7 @@ namespace Presentation.Controllers
     [Route("api/auth")]
     public class AuthenticationController(IAuthenticationService authenticationService) : ControllerBase
     {
-        [Authorize]
+        //[Authorize]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {

@@ -1,5 +1,7 @@
 using Application.RepositoryInterfaces;
+using Application.Services.Business;
 using Domain.Helpers;
+using Domain.Interfaces.Repositories;
 using Infrastructure.Configuration;
 using Infrastructure.Context;
 using Infrastructure.Repositories;
@@ -18,6 +20,8 @@ namespace Infrastructure
             AddRepositories(services);
 
             AddConfiguration(services, configuration);
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             
             services.AddDbContext<DataContext>(options =>
             {
@@ -37,6 +41,7 @@ namespace Infrastructure
         private static IServiceCollection AddRepositories(IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IBusinessRepository, BusinessRepository>();
             
             return services;
         }

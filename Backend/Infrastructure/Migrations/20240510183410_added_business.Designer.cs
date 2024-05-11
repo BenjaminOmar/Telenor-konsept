@@ -4,6 +4,7 @@ using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240510183410_added_business")]
+    partial class added_business
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,10 +33,6 @@ namespace Infrastructure.Migrations
                         .HasColumnName("BusinessId");
 
                     b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("County")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -60,27 +59,10 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PostCode")
-                        .HasColumnType("int");
-
                     b.HasKey("Id")
                         .HasName("PK_BusinessId");
 
                     b.ToTable("Business", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
-                            Address = "Snarøyveien 30",
-                            County = "Fornebu",
-                            CreatedBy = new Guid("2d718eaa-7518-4c5b-8fe0-241bd2b69b0c"),
-                            CreatedOn = new DateTime(2024, 5, 10, 18, 50, 28, 756, DateTimeKind.Utc).AddTicks(2190),
-                            Email = "noreply@telenor.com",
-                            IsDeleted = false,
-                            Name = "Telenor",
-                            PostCode = 1360
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Role", b =>
@@ -122,7 +104,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("ccafb929-aa82-4981-96f9-53864b688c89"),
                             CreatedBy = new Guid("2d718eaa-7518-4c5b-8fe0-241bd2b69b0c"),
-                            CreatedOn = new DateTime(2024, 5, 10, 18, 50, 28, 756, DateTimeKind.Utc).AddTicks(4510),
+                            CreatedOn = new DateTime(2024, 5, 10, 18, 34, 10, 651, DateTimeKind.Utc).AddTicks(6030),
                             IsDeleted = false,
                             Name = "User"
                         },
@@ -130,7 +112,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("dd5a13da-11e4-4554-a697-76a4102fd72e"),
                             CreatedBy = new Guid("2d718eaa-7518-4c5b-8fe0-241bd2b69b0c"),
-                            CreatedOn = new DateTime(2024, 5, 10, 18, 50, 28, 756, DateTimeKind.Utc).AddTicks(4510),
+                            CreatedOn = new DateTime(2024, 5, 10, 18, 34, 10, 651, DateTimeKind.Utc).AddTicks(6030),
                             IsDeleted = false,
                             Name = "Admin"
                         });
@@ -142,9 +124,6 @@ namespace Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("UserId");
-
-                    b.Property<Guid>("BusinessId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -190,8 +169,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("PK_UserId");
 
-                    b.HasIndex("BusinessId");
-
                     b.HasIndex("RoleId");
 
                     b.HasIndex("Username")
@@ -202,26 +179,13 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
-                    b.HasOne("Domain.Entities.Business", "Business")
-                        .WithMany("Users")
-                        .HasForeignKey("BusinessId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Business");
-
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Business", b =>
-                {
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("Domain.Entities.Role", b =>
