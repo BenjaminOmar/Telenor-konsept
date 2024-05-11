@@ -1,5 +1,7 @@
 using Application.Services.Authentication;
 using Application.Services.Business;
+using Application.Services.Customer;
+using Domain.Interfaces.Services.Customer;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application
@@ -16,6 +18,7 @@ namespace Application
         {
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IBusinessService, BusinessService>();
+            services.AddScoped<ICustomerService, CustomerService>();
             return services;
         }
     }

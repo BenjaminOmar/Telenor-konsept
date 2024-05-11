@@ -1,5 +1,4 @@
 using Application.RepositoryInterfaces;
-using Application.Services.Business;
 using Domain.Helpers;
 using Domain.Interfaces.Repositories;
 using Infrastructure.Configuration;
@@ -42,6 +41,7 @@ namespace Infrastructure
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IBusinessRepository, BusinessRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
             
             return services;
         }

@@ -19,4 +19,8 @@ public class Customer : BaseEntity
     public string? Email { get; set; }
     
     public string? PhoneNumber { get; set; }
+    
+    public Guid BusinessId { get; set; }
+    
+    public Business Business { get; set; } = null!;
 }

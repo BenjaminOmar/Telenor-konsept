@@ -16,4 +16,6 @@ public class Business : BaseEntity
     public string Email { get; set; } = null!;
     
     public ICollection<User> Users { get; set; } = [];
+
+    public ICollection<Customer> Customers { get; set; } = [];
 }
