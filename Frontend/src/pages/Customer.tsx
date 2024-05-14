@@ -2,12 +2,12 @@ import {Button} from '@rneui/base';
 import React from 'react';
 import {Text, View} from 'react-native';
 
-function Business() {
+function Customer() {
   return (
     <View>
-      <Text>bedrift</Text>
+      <Text>kunde</Text>
     </View>
   );
 }
 
-export default Business;
+export default Customer;

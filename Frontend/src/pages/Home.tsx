@@ -8,7 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwsome5 from 'react-native-vector-icons/FontAwesome';
 import Header from '../components/header/Header';
-import Business from './Business';
+import Customer from './Customer';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +25,7 @@ const Home = () => {
         }}>
         <Tab.Screen
           name="Bedriftsliste"
-          component={Business}
+          component={Customer}
           options={{
             tabBarIcon: ({color, size}) => (
               <Ionicons name="business" size={size} color={color} />
