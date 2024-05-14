@@ -1,12 +1,13 @@
+import {Button} from '@rneui/base';
 import React from 'react';
 import {Text, View} from 'react-native';
 
-function BusinessList() {
+function Business() {
   return (
     <View>
-      <Text>bedriftsliste</Text>
+      <Text>bedrift</Text>
     </View>
   );
 }
 
-export default BusinessList;
+export default Business;

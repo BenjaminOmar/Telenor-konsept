@@ -3,12 +3,12 @@ import React from 'react';
 import Dashboard from './Dashboard';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import BusinessList from './BusinessList';
 import Tasks from './Tasks';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwsome5 from 'react-native-vector-icons/FontAwesome';
 import Header from '../components/header/Header';
+import Business from './Business';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +25,7 @@ const Home = () => {
         }}>
         <Tab.Screen
           name="Bedriftsliste"
-          component={BusinessList}
+          component={Business}
           options={{
             tabBarIcon: ({color, size}) => (
               <Ionicons name="business" size={size} color={color} />
