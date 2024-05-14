@@ -31,11 +31,11 @@ export const Layout = () => {
             <Stack.Screen
               name="Home"
               component={Home}
-              options={{headerShown: false}}
+              options={{headerShown: false, animation: 'fade'}}
             />
           ) : (
             <Stack.Screen
-              options={{headerShown: false}}
+              options={{headerShown: false, animation: 'fade'}}
               name="Login"
               component={Login}
             />
@@ -44,6 +44,18 @@ export const Layout = () => {
       </QueryClientProvider>
     </SafeAreaProvider>
   );
+};
+
+const config = {
+  animation: 'spring',
+  config: {
+    stiffness: 1000,
+    damping: 50,
+    mass: 3,
+    overshootClamping: false,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
+  },
 };
 
 export default App;

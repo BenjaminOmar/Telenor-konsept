@@ -15,10 +15,17 @@ public class CustomerController : ControllerBase
         _customerService = customerService;
     }
     
-    [Authorize]
+    //[Authorize]
     [HttpGet]
     public async Task<IActionResult> GetCustomer()
     {
-        return Ok();
+        var result = await _customerService.GetCustomerList();
+        
+        if (result.IsSuccess)
+        {
+            return Ok(result);
+        }
+
+        return BadRequest("Error ved henting av kundeliste");
     }
 }

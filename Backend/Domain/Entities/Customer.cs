@@ -6,7 +6,7 @@ public class Customer : BaseEntity
     
     public string Name { get; set; } = null!;
 
-    public bool IsPrivateCustomer { get; set; } = false;
+    public bool IsPrivateCustomer { get; set; }
     
     public int OrganizationNr { get; set; }
 
