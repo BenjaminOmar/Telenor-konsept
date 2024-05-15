@@ -22,5 +22,9 @@ public class Customer : BaseEntity
     
     public Guid BusinessId { get; set; }
     
+    public Guid StatusId { get; set; }
+
+    public Status Status { get; set; } = null!;
+    
     public Business Business { get; set; } = null!;
 }

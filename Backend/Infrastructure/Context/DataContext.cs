@@ -7,10 +7,9 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
-    
     public DbSet<Business> Businesses { get; set; }
-    
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<Status> Statuses { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -43,14 +42,6 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             entity.HasIndex(u => u.Username).IsUnique();
 
             entity.Property(e => e.RoleId).HasColumnName("RoleId").IsRequired();
-            
-            entity.HasOne(u => u.Role)
-                  .WithMany(r => r.Users)
-                  .HasForeignKey(u => u.RoleId);
-            
-            entity.HasOne(b => b.Business)
-                .WithMany(u => u.Users)
-                .HasForeignKey(b => b.BusinessId);
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -64,16 +55,60 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
                 new Role 
                     { Id = Guid.Parse("ccafb929-aa82-4981-96f9-53864b688c89"), 
                         Name = "User", 
-                        CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464") ,
+                        CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
                         CreatedOn = DateTime.UtcNow
                     },
                 new Role 
                     { Id = Guid.Parse("dd5a13da-11e4-4554-a697-76a4102fd72e"), 
                         Name = "Admin",
-                        CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464") ,
+                        CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
                         CreatedOn = DateTime.UtcNow
                     }
             );
+        });
+        
+        modelBuilder.Entity<Status>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_StatusId");
+            entity.Property(e => e.Id).HasColumnName("StatusId");
+            entity.ToTable("Status");
+
+            entity.HasData(
+                new Status
+                    {
+                        Id = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c"),
+                        Name = "Lead",
+                        CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                        CreatedOn = DateTime.UtcNow
+                    },
+                new Status
+                {
+                    Id = Guid.Parse("08bc99d4-87ac-4f56-89e9-af19ab20ab95"),
+                    Name = "Tatt Kontakt",
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                    CreatedOn = DateTime.UtcNow
+                },
+                new Status
+                {
+                    Id = Guid.Parse("2b8cc7ea-d47b-4d01-90d9-1581ce380422"),
+                    Name = "I Prosess",
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                    CreatedOn = DateTime.UtcNow
+                },
+                new Status
+                {
+                    Id = Guid.Parse("edd4e8aa-d3bd-40f1-8a97-8da40cef43bb"),
+                    Name = "Kunde",
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                    CreatedOn = DateTime.UtcNow
+                },
+                new Status
+                {
+                    Id = Guid.Parse("60e8fa5e-560d-41f7-b16c-593e5b0cfd3b"),
+                    Name = "Avslått",
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                    CreatedOn = DateTime.UtcNow
+                });
         });
 
         modelBuilder.Entity<Customer>(entity =>
@@ -82,6 +117,8 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             entity.Property(e => e.Id).HasColumnName("CustomerId");
             entity.ToTable("Customer");
             entity.Property(e => e.CustomerNumber).UseIdentityColumn();
+            entity.HasIndex(e => e.Name).IsUnique();
+            entity.HasIndex(e => e.OrganizationNr).IsUnique();
 
             entity.HasData(
                 new Customer
@@ -97,7 +134,24 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
                     PhoneNumber = "12345678",
                     BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
                     CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464") ,
-                    CreatedOn = DateTime.UtcNow
+                    CreatedOn = DateTime.UtcNow,
+                    StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
+                },
+                new Customer
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Test",
+                    IsPrivateCustomer = false,
+                    OrganizationNr = 135734567,
+                    Address = "Benjamins hus",
+                    PostCode = 0000,
+                    County = "Tønsberg",
+                    Email = "Benjamin@gmail.com",
+                    PhoneNumber = "12345578",
+                    BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464") ,
+                    CreatedOn = DateTime.UtcNow,
+                    StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
                 });
         });
     }

@@ -75,7 +75,7 @@ namespace Infrastructure.Migrations
                             Address = "Snarøyveien 30",
                             County = "Fornebu",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 5, 11, 21, 27, 12, 156, DateTimeKind.Utc).AddTicks(9230),
+                            CreatedOn = new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(4880),
                             Email = "noreply@telenor.com",
                             IsDeleted = false,
                             Name = "Telenor",
@@ -130,7 +130,7 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("OrganizationNr")
                         .HasColumnType("int");
@@ -141,10 +141,21 @@ namespace Infrastructure.Migrations
                     b.Property<int>("PostCode")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("StatusId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id")
                         .HasName("PK_CustomerId");
 
                     b.HasIndex("BusinessId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("OrganizationNr")
+                        .IsUnique();
+
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Customer", (string)null);
 
@@ -156,7 +167,7 @@ namespace Infrastructure.Migrations
                             BusinessId = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
                             County = "Oslo",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 5, 11, 21, 27, 12, 157, DateTimeKind.Utc).AddTicks(2140),
+                            CreatedOn = new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(7460),
                             CustomerNumber = 0,
                             Email = "Daniel@gmail.com",
                             IsDeleted = false,
@@ -164,7 +175,26 @@ namespace Infrastructure.Migrations
                             Name = "Daniel Holtet",
                             OrganizationNr = 123456789,
                             PhoneNumber = "12345678",
-                            PostCode = 0
+                            PostCode = 0,
+                            StatusId = new Guid("728df2fc-4cbc-4945-8deb-b4e500f1898c")
+                        },
+                        new
+                        {
+                            Id = new Guid("0d207162-26ee-4001-a54c-9178ade4f002"),
+                            Address = "Benjamins hus",
+                            BusinessId = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
+                            County = "Tønsberg",
+                            CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                            CreatedOn = new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(7480),
+                            CustomerNumber = 0,
+                            Email = "Benjamin@gmail.com",
+                            IsDeleted = false,
+                            IsPrivateCustomer = false,
+                            Name = "Test",
+                            OrganizationNr = 135734567,
+                            PhoneNumber = "12345578",
+                            PostCode = 0,
+                            StatusId = new Guid("728df2fc-4cbc-4945-8deb-b4e500f1898c")
                         });
                 });
 
@@ -207,7 +237,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("ccafb929-aa82-4981-96f9-53864b688c89"),
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 5, 11, 21, 27, 12, 157, DateTimeKind.Utc).AddTicks(1570),
+                            CreatedOn = new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(6140),
                             IsDeleted = false,
                             Name = "User"
                         },
@@ -215,9 +245,83 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("dd5a13da-11e4-4554-a697-76a4102fd72e"),
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 5, 11, 21, 27, 12, 157, DateTimeKind.Utc).AddTicks(1570),
+                            CreatedOn = new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(6140),
                             IsDeleted = false,
                             Name = "Admin"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.Status", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("StatusId");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .HasName("PK_StatusId");
+
+                    b.ToTable("Status", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("728df2fc-4cbc-4945-8deb-b4e500f1898c"),
+                            CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                            CreatedOn = new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(6370),
+                            IsDeleted = false,
+                            Name = "Lead"
+                        },
+                        new
+                        {
+                            Id = new Guid("08bc99d4-87ac-4f56-89e9-af19ab20ab95"),
+                            CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                            CreatedOn = new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(6370),
+                            IsDeleted = false,
+                            Name = "Tatt Kontakt"
+                        },
+                        new
+                        {
+                            Id = new Guid("2b8cc7ea-d47b-4d01-90d9-1581ce380422"),
+                            CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                            CreatedOn = new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(6370),
+                            IsDeleted = false,
+                            Name = "I Prosess"
+                        },
+                        new
+                        {
+                            Id = new Guid("edd4e8aa-d3bd-40f1-8a97-8da40cef43bb"),
+                            CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                            CreatedOn = new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(6380),
+                            IsDeleted = false,
+                            Name = "Kunde"
+                        },
+                        new
+                        {
+                            Id = new Guid("60e8fa5e-560d-41f7-b16c-593e5b0cfd3b"),
+                            CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                            CreatedOn = new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(6380),
+                            IsDeleted = false,
+                            Name = "Avslått"
                         });
                 });
 
@@ -293,7 +397,15 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.Status", "Status")
+                        .WithMany("Customers")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Business");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -325,6 +437,11 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Role", b =>
                 {
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Status", b =>
+                {
+                    b.Navigation("Customers");
                 });
 #pragma warning restore 612, 618
         }

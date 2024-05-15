@@ -6,6 +6,7 @@ function Customer() {
   return (
     <View>
       <Text>kunde</Text>
+      <Button>Trykk her</Button>
     </View>
   );
 }
