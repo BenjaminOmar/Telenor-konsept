@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingRight: 30,
-    paddingTop: 20,
+    paddingTop: 10,
+    marginBottom: 20,
   },
 });
 
