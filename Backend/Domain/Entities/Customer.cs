@@ -8,7 +8,7 @@ public class Customer : BaseEntity
 
     public bool IsPrivateCustomer { get; set; }
     
-    public int OrganizationNr { get; set; }
+    public int? OrganizationNr { get; set; }
 
     public string Address { get; set; } = null!;
     

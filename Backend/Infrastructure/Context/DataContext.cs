@@ -118,7 +118,6 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             entity.ToTable("Customer");
             entity.Property(e => e.CustomerNumber).UseIdentityColumn();
             entity.HasIndex(e => e.Name).IsUnique();
-            entity.HasIndex(e => e.OrganizationNr).IsUnique();
 
             entity.HasData(
                 new Customer
