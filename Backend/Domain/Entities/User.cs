@@ -22,5 +22,9 @@ public class User : BaseEntity
     public string? Email { get; set; }
 
     public Guid RoleId { get; set; }
+    
+    public Guid BusinessId { get; set; }
+    
     public Role Role { get; set; } = null!;
+    public Business Business { get; set; } = null!;
 }
