@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Modal,
   Text,
-  TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native';
 
@@ -28,6 +27,8 @@ const NewCustomerModal: React.FC<Props> = ({
           <TouchableWithoutFeedback onPress={() => {}}>
             <View style={styles.modalContent}>
               <Text style={styles.headerText}>Opprett Kunde</Text>
+              <View style={styles.divider} />
+              {/* Add your other content here */}
             </View>
           </TouchableWithoutFeedback>
         </View>
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#00ACE7',
-    marginBottom: 20,
+    marginBottom: 10,
     marginTop: 10,
   },
   modalContent: {
@@ -57,6 +58,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     alignItems: 'center',
+  },
+  divider: {
+    width: '100%',
+    height: 3,
+    borderRadius: 10,
+    backgroundColor: '#CED0CE',
+    marginVertical: 5,
   },
 });
 
