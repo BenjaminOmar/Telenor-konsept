@@ -1,16 +1,9 @@
 import {Button} from '@rneui/base';
 import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  Modal,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import CustomerList from '../components/customer/CustomerList';
-import CustomInput from '../components/common/inputs/CustomInput';
 import SearchInput from '../components/common/inputs/SearchInput';
+import NewCustomerModal from '../components/customer/NewCustomerModal'; // Import the new modal component
 
 function Customer() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -48,21 +41,10 @@ function Customer() {
         </View>
       </View>
       <CustomerList search={customerName} />
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={handleCloseModal}>
-        <TouchableWithoutFeedback onPress={handleCloseModal}>
-          <View style={styles.modalOverlay}>
-            <TouchableWithoutFeedback onPress={() => {}}>
-              <View style={styles.modalContent}>
-                <Text style={styles.headerText}>Ny bedrift</Text>
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
+      <NewCustomerModal
+        modalVisible={modalVisible}
+        handleCloseModal={handleCloseModal}
+      />
     </View>
   );
 }
@@ -90,27 +72,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: 80,
     height: 47,
-  },
-  modalOverlay: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#00ACE7',
-    marginBottom: 20,
-    marginTop: 10,
-  },
-  modalContent: {
-    width: '80%',
-    height: '70%',
-    padding: 20,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    alignItems: 'center',
   },
 });
 
