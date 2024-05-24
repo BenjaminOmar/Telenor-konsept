@@ -25,6 +25,11 @@ public class CustomerService : ICustomerService
     
     public async Task<Result<CreateCustomerResponseDto>> CreateCustomer(CreateCustomerRequestDto createCustomerRequestDto)
     {
+        if (!await CheckCustomerNameUnique(createCustomerRequestDto.Name))
+        {
+            return Result<CreateCustomerResponseDto>.Failure("Bedriften er allerede registrert", 409);
+        }
+        
         if (!await StatusExists(createCustomerRequestDto.StatusId))
         {
             return Result<CreateCustomerResponseDto>.Failure("Valgt status finnes ikke i vårt system", 404);
@@ -37,6 +42,11 @@ public class CustomerService : ICustomerService
     {
         var status = await _statusRepository.GetById(statusId);
         return status != null;
+    }
+
+    private async Task<bool> CheckCustomerNameUnique(string customerName)
+    {
+        return await _customerRepository.CheckCustomerNameExists(customerName);
     }
 
 }

@@ -22,4 +22,11 @@ public class CustomerRepository(DataContext context, IMapper mapper) : BaseRepos
             .ProjectTo<CustomerListResponseDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }
+
+    public async Task<bool> CheckCustomerNameExists(string customerName)
+    {
+        IQueryable<Customer> customerQuery = _context.Customers;
+
+        return await customerQuery.AnyAsync(c => c.Name == customerName);
+    }
 }
