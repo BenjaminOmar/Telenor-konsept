@@ -19,5 +19,12 @@ public class CustomerService : ICustomerService
 
         return Result<List<CustomerListResponseDto>>.Success(customerList);
     }
-    
+
+    /*
+    public async Task<Result<CreateCustomerResponseDto>> CreateCustomer()
+    {
+        
+        return Result<CreateCustomerResponseDto>.Success()
+    } */
+
 }

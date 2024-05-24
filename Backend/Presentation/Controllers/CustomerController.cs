@@ -1,3 +1,4 @@
+using Domain.DTOs.Customer;
 using Domain.Interfaces.Services.Customer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,5 +28,12 @@ public class CustomerController : ControllerBase
         }
 
         return BadRequest("Error ved henting av kundeliste");
+    }
+    
+    //[Authorize]
+    [HttpPost]
+    public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequestDto customerRequestDto)
+    {
+        return Created();
     }
 }

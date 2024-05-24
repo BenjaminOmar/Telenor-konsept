@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Application.RepositoryInterfaces;
+using Domain.DTOs.Authentication;
 using Domain.Entities;
 using Domain.Helpers;
 using Microsoft.AspNetCore.Http;
