@@ -18,6 +18,7 @@ public class CustomerRepository(DataContext context, IMapper mapper) : BaseRepos
         IQueryable<Customer> customerQuery = _context.Customers;
 
         return await customerQuery
+            .OrderByDescending(c => c.CreatedOn)
             .ProjectTo<CustomerListResponseDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }

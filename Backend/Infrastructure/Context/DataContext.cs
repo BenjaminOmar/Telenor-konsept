@@ -122,36 +122,166 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             entity.HasData(
                 new Customer
                 {
-                    Id = Guid.Parse("04ae4661-009e-47c3-a96f-e8b8ed15b39a"),
-                    Name = "Daniel Holtet",
-                    IsPrivateCustomer = true,
-                    OrganizationNr = 123456789,
-                    Address = "Daniels hus",
-                    PostCode = 0000,
-                    County = "Oslo",
-                    Email = "Daniel@gmail.com",
-                    PhoneNumber = "12345678",
+                    Id = Guid.NewGuid(),
+                    Name = "Telenor",
+                    IsPrivateCustomer = false,
+                    OrganizationNr = 911066905,
+                    Address = "Snarøyveien 30",
+                    PostCode = 1360,
+                    County = "Fornebu",
+                    Email = "contact@telenor.com",
+                    PhoneNumber = "67800000",
                     BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
-                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464") ,
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
                     CreatedOn = DateTime.UtcNow,
                     StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
                 },
                 new Customer
                 {
                     Id = Guid.NewGuid(),
-                    Name = "Test",
+                    Name = "Equinor",
                     IsPrivateCustomer = false,
-                    OrganizationNr = 135734567,
-                    Address = "Benjamins hus",
-                    PostCode = 0000,
-                    County = "Tønsberg",
-                    Email = "Benjamin@gmail.com",
-                    PhoneNumber = "12345578",
+                    OrganizationNr = 923609016,
+                    Address = "Forusbeen 50",
+                    PostCode = 4035,
+                    County = "Stavanger",
+                    Email = "contact@equinor.com",
+                    PhoneNumber = "51990000",
                     BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
-                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464") ,
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                    CreatedOn = DateTime.UtcNow,
+                    StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
+                },
+                new Customer
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Norsk Hydro",
+                    IsPrivateCustomer = false,
+                    OrganizationNr = 914778271,
+                    Address = "Drammensveien 260",
+                    PostCode = 0283,
+                    County = "Oslo",
+                    Email = "contact@hydro.com",
+                    PhoneNumber = "22532000",
+                    BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                    CreatedOn = DateTime.UtcNow,
+                    StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
+                },
+                new Customer
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Yara International",
+                    IsPrivateCustomer = false,
+                    OrganizationNr = 919937882,
+                    Address = "Drammensveien 131",
+                    PostCode = 0277,
+                    County = "Oslo",
+                    Email = "contact@yara.com",
+                    PhoneNumber = "24155000",
+                    BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                    CreatedOn = DateTime.UtcNow,
+                    StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
+                },
+                new Customer
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "DNB",
+                    IsPrivateCustomer = false,
+                    OrganizationNr = 984851006,
+                    Address = "Dronning Eufemias gate 30",
+                    PostCode = 0191,
+                    County = "Oslo",
+                    Email = "contact@dnb.no",
+                    PhoneNumber = "91504800",
+                    BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                    CreatedOn = DateTime.UtcNow,
+                    StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
+                },
+                new Customer
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Orkla",
+                    IsPrivateCustomer = false,
+                    OrganizationNr = 910747711,
+                    Address = "Skøyen",
+                    PostCode = 0277,
+                    County = "Oslo",
+                    Email = "contact@orkla.no",
+                    PhoneNumber = "22542000",
+                    BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                    CreatedOn = DateTime.UtcNow,
+                    StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
+                },
+                new Customer
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Tine",
+                    IsPrivateCustomer = false,
+                    OrganizationNr = 874560982,
+                    Address = "Lakkegata 23",
+                    PostCode = 0187,
+                    County = "Oslo",
+                    Email = "contact@tine.no",
+                    PhoneNumber = "03080",
+                    BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                    CreatedOn = DateTime.UtcNow,
+                    StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
+                },
+                new Customer
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Gjensidige",
+                    IsPrivateCustomer = false,
+                    OrganizationNr = 995568217,
+                    Address = "Schweigaards gate 21",
+                    PostCode = 0191,
+                    County = "Oslo",
+                    Email = "contact@gjensidige.no",
+                    PhoneNumber = "91503100",
+                    BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                    CreatedOn = DateTime.UtcNow,
+                    StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
+                },
+                new Customer
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Norsk Tipping",
+                    IsPrivateCustomer = false,
+                    OrganizationNr = 982480105,
+                    Address = "Hamar",
+                    PostCode = 2325,
+                    County = "Hedmark",
+                    Email = "contact@norsk-tipping.no",
+                    PhoneNumber = "62508750",
+                    BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
+                    CreatedOn = DateTime.UtcNow,
+                    StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
+                },
+                new Customer
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "SpareBank 1",
+                    IsPrivateCustomer = false,
+                    OrganizationNr = 947032579,
+                    Address = "Hammersborggata 2",
+                    PostCode = 0106,
+                    County = "Oslo",
+                    Email = "contact@sparebank1.no",
+                    PhoneNumber = "91504800",
+                    BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
+                    CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
                     CreatedOn = DateTime.UtcNow,
                     StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
                 });
+
+
         });
     }
 }

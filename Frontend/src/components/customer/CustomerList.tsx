@@ -1,3 +1,4 @@
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -6,11 +7,19 @@ import {
   ActivityIndicator,
   RefreshControl,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
-const CustomerList = () => {
-  const [data, setData] = useState([]);
+interface Customer {
+  customerId: number;
+  name: string;
+}
+
+interface CustomerListProps {
+  search: string;
+}
+
+const CustomerList: React.FC<CustomerListProps> = ({search}) => {
+  const [data, setData] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -36,7 +45,7 @@ const CustomerList = () => {
     fetchData();
   };
 
-  const renderItem = ({item}: {item: any}) => (
+  const renderItem = ({item}: {item: Customer}) => (
     <View style={styles.itemContainer}>
       <Text style={styles.itemText}>{item.name}</Text>
     </View>
@@ -50,9 +59,14 @@ const CustomerList = () => {
     );
   }
 
+  // Filter data based on the filterValue prop
+  const filteredData = data.filter(item =>
+    item.name.toLowerCase().includes(search.toLowerCase()),
+  );
+
   return (
     <FlatList
-      data={data}
+      data={filteredData}
       keyExtractor={item => item.customerId.toString()}
       renderItem={renderItem}
       contentContainerStyle={styles.listContainer}
@@ -76,7 +90,6 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     padding: 10,
-    paddingBottom: '115%',
   },
   itemContainer: {
     padding: 20,

@@ -9,9 +9,12 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import CustomerList from '../components/customer/CustomerList';
+import CustomInput from '../components/common/inputs/CustomInput';
+import SearchInput from '../components/common/inputs/SearchInput';
 
 function Customer() {
   const [modalVisible, setModalVisible] = useState(false);
+  const [customerName, setCustomerName] = useState('');
 
   const handleAddButtonPress = () => {
     setModalVisible(true);
@@ -23,19 +26,28 @@ function Customer() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <Button
-          icon={{
-            name: 'add',
-            type: 'material',
-            size: 25,
-            color: 'white',
-          }}
-          buttonStyle={styles.addButton}
-          onPress={handleAddButtonPress}
-        />
+      <View style={styles.customerHeader}>
+        <View style={styles.searchInput}>
+          <SearchInput
+            value={customerName}
+            setValue={setCustomerName}
+            placeholder="Søk etter bedrift"
+          />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            icon={{
+              name: 'add',
+              type: 'material',
+              size: 25,
+              color: 'white',
+            }}
+            buttonStyle={styles.addButton}
+            onPress={handleAddButtonPress}
+          />
+        </View>
       </View>
-      <CustomerList />
+      <CustomerList search={customerName} />
       <Modal
         animationType="fade"
         transparent={true}
@@ -60,15 +72,24 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   buttonContainer: {
-    alignItems: 'flex-end',
     marginRight: 20,
     marginBottom: 5,
   },
+  customerHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 0,
+    marginBottom: 10,
+  },
+  searchInput: {
+    flex: 1,
+  },
   addButton: {
     backgroundColor: '#32CD32',
-    borderRadius: 7,
-    width: 70,
-    height: 40,
+    borderRadius: 10,
+    width: 80,
+    height: 47,
   },
   modalOverlay: {
     flex: 1,
