@@ -41,6 +41,8 @@ public class CustomerController : ControllerBase
             return result.ErrorCode switch
             {
                 404 => NotFound(result),
+                409 => Conflict(result),
+                400 => BadRequest(result),
                 _ => StatusCode(500, result)
             };
         }
