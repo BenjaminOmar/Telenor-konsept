@@ -25,7 +25,7 @@ public class CustomerService : ICustomerService
     
     public async Task<Result<CreateCustomerResponseDto>> CreateCustomer(CreateCustomerRequestDto createCustomerRequestDto)
     {
-        if (!await CheckCustomerNameUnique(createCustomerRequestDto.Name))
+        if (await CheckCustomerNameUnique(createCustomerRequestDto.Name))
         {
             return Result<CreateCustomerResponseDto>.Failure("Bedriften er allerede registrert", 409);
         }
