@@ -34,6 +34,17 @@ public class CustomerController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequestDto customerRequestDto)
     {
+        var result = await _customerService.CreateCustomer(customerRequestDto);
+
+        if (!result.IsSuccess)
+        {
+            return result.ErrorCode switch
+            {
+                404 => NotFound(result),
+                _ => StatusCode(500, result)
+            };
+        }
+        
         return Created();
     }
 }

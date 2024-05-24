@@ -8,9 +8,11 @@ namespace Application.Services.Customer;
 public class CustomerService : ICustomerService
 {
     private readonly ICustomerRepository _customerRepository;
-    public CustomerService(ICustomerRepository customerRepository)
+    private readonly IStatusRepository _statusRepository;
+    public CustomerService(ICustomerRepository customerRepository, IStatusRepository statusRepository)
     {
         _customerRepository = customerRepository;
+        _statusRepository = statusRepository;
     }
     
     public async Task<Result<List<CustomerListResponseDto>>> GetCustomerList()
@@ -20,11 +22,21 @@ public class CustomerService : ICustomerService
         return Result<List<CustomerListResponseDto>>.Success(customerList);
     }
 
-    /*
-    public async Task<Result<CreateCustomerResponseDto>> CreateCustomer()
+    
+    public async Task<Result<CreateCustomerResponseDto>> CreateCustomer(CreateCustomerRequestDto createCustomerRequestDto)
     {
+        if (!await StatusExists(createCustomerRequestDto.StatusId))
+        {
+            return Result<CreateCustomerResponseDto>.Failure("Valgt status finnes ikke i vårt system", 404);
+        }
         
-        return Result<CreateCustomerResponseDto>.Success()
-    } */
+        return Result<CreateCustomerResponseDto>.Success(new CreateCustomerResponseDto());
+    }
+
+    private async Task<bool> StatusExists(Guid statusId)
+    {
+        var status = await _statusRepository.GetById(statusId);
+        return status != null;
+    }
 
 }
