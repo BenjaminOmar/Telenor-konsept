@@ -19,8 +19,6 @@ namespace Infrastructure
             AddRepositories(services);
 
             AddConfiguration(services, configuration);
-
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             
             services.AddDbContext<DataContext>(options =>
             {

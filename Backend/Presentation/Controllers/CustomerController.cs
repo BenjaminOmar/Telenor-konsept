@@ -49,4 +49,9 @@ public class CustomerController : ControllerBase
         
         return Created();
     }
+
+    public async Task<IActionResult> GetCreateCustomerOptions()
+    {
+        return Ok();
+    }
 }

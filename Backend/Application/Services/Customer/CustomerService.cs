@@ -1,3 +1,4 @@
+using AutoMapper;
 using Domain.DTOs.Customer;
 using Domain.Helpers;
 using Domain.Interfaces.Repositories;
@@ -9,10 +10,12 @@ public class CustomerService : ICustomerService
 {
     private readonly ICustomerRepository _customerRepository;
     private readonly IStatusRepository _statusRepository;
-    public CustomerService(ICustomerRepository customerRepository, IStatusRepository statusRepository)
+    private readonly IMapper _mapper;
+    public CustomerService(ICustomerRepository customerRepository, IStatusRepository statusRepository, IMapper mapper)
     {
         _customerRepository = customerRepository;
         _statusRepository = statusRepository;
+        _mapper = mapper;
     }
     
     public async Task<Result<List<CustomerListResponseDto>>> GetCustomerList()
@@ -35,7 +38,11 @@ public class CustomerService : ICustomerService
             return Result<CreateCustomerResponseDto>.Failure("Valgt status finnes ikke i vårt system", 404);
         }
         
-        return Result<CreateCustomerResponseDto>.Success(new CreateCustomerResponseDto());
+        var newCustomer = _mapper.Map<Domain.Entities.Customer>(createCustomerRequestDto);
+        await _customerRepository.Add(newCustomer);
+        
+        var responseDto = _mapper.Map<CreateCustomerResponseDto>(newCustomer);
+        return Result<CreateCustomerResponseDto>.Success(responseDto);
     }
 
     private async Task<bool> StatusExists(Guid statusId)

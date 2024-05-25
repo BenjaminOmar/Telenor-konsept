@@ -13,6 +13,7 @@ namespace Application
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             AddServices(services);
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             return services;
         }
         
