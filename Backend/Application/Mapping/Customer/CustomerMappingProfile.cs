@@ -7,6 +7,6 @@ public class CustomerMappingProfile : Profile
 {
     public CustomerMappingProfile()
     {
-        CreateMap<CreateCustomerRequestDto, Domain.Entities.Customer>();
+        CreateMap<Domain.Entities.Customer, CreateCustomerResponseDto>();
     }
 }

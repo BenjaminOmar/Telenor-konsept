@@ -38,7 +38,21 @@ public class CustomerService : ICustomerService
             return Result<CreateCustomerResponseDto>.Failure("Valgt status finnes ikke i vårt system", 404);
         }
         
-        var newCustomer = _mapper.Map<Domain.Entities.Customer>(createCustomerRequestDto);
+        var newCustomer =  new Domain.Entities.Customer()
+        {
+            Id = Guid.NewGuid(),
+            Name = createCustomerRequestDto.Name,
+            IsPrivateCustomer = createCustomerRequestDto.IsPrivateCustomer,
+            OrganizationNr = createCustomerRequestDto.OrganizationNr,
+            Address = createCustomerRequestDto.Address,
+            PostCode = createCustomerRequestDto.PostCode,
+            County = createCustomerRequestDto.County,
+            Email = createCustomerRequestDto.Email,
+            PhoneNumber = createCustomerRequestDto.PhoneNumber,
+            BusinessId = new Guid(), // GET THE BUSINESSID OF THE USER
+            StatusId = createCustomerRequestDto.StatusId,
+            // ADD CREATEDBY AND THE OTHERS
+        };
         await _customerRepository.Add(newCustomer);
         
         var responseDto = _mapper.Map<CreateCustomerResponseDto>(newCustomer);

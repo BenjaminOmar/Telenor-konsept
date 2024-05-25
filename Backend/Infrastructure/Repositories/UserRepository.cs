@@ -28,7 +28,7 @@ public class UserRepository : BaseRepository<User>, IUserRepository
     /// Retrieves a user by username asynchronously.
     /// </summary>
     /// <param name="username">The target username.</param>
-    /// <returns>A User if found; otherwise, null.</returns>
+    /// <returns>A UserServices if found; otherwise, null.</returns>
     public async Task<User?> GetUser(string username)
     {
         return await _context.Users

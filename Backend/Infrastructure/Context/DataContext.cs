@@ -38,7 +38,7 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
         {
             entity.HasKey(e => e.Id).HasName("PK_UserId");
             entity.Property(e => e.Id).HasColumnName("UserId");
-            entity.ToTable("User");
+            entity.ToTable("UserServices");
             entity.HasIndex(u => u.Username).IsUnique();
 
             entity.Property(e => e.RoleId).HasColumnName("RoleId").IsRequired();
@@ -54,7 +54,7 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             entity.HasData(
                 new Role 
                     { Id = Guid.Parse("ccafb929-aa82-4981-96f9-53864b688c89"), 
-                        Name = "User", 
+                        Name = "UserServices", 
                         CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
                         CreatedOn = DateTime.UtcNow
                     },
