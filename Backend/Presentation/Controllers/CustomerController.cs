@@ -47,8 +47,8 @@ public class CustomerController : ControllerBase
                 _ => StatusCode(500, result)
             };
         }
-        
-        return Created();
+
+        return Ok(result.Value.Name + " " + "er oprettet");
     }
 
     public async Task<IActionResult> GetCreateCustomerOptions()
