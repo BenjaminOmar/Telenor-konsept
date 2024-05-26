@@ -3,6 +3,7 @@ using Domain.DTOs.Customer;
 using Domain.Helpers;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services.Customer;
+using Domain.Interfaces.Services.User;
 
 namespace Application.Services.Customer;
 
@@ -10,11 +11,13 @@ public class CustomerService : ICustomerService
 {
     private readonly ICustomerRepository _customerRepository;
     private readonly IStatusRepository _statusRepository;
+    private readonly ICurrentUserService _currentUserService;
     private readonly IMapper _mapper;
-    public CustomerService(ICustomerRepository customerRepository, IStatusRepository statusRepository, IMapper mapper)
+    public CustomerService(ICustomerRepository customerRepository, IStatusRepository statusRepository, ICurrentUserService currentUserService, IMapper mapper)
     {
         _customerRepository = customerRepository;
         _statusRepository = statusRepository;
+        _currentUserService = currentUserService;
         _mapper = mapper;
     }
     
@@ -37,6 +40,16 @@ public class CustomerService : ICustomerService
         {
             return Result<CreateCustomerResponseDto>.Failure("Valgt status finnes ikke i vårt system", 404);
         }
+
+        var test = _currentUserService.UserId;
+        
+
+        var currentUser = await _currentUserService.GetUser();
+
+        if (currentUser is null)
+        {
+            return Result<CreateCustomerResponseDto>.Failure("Kan ikke finne din bruker i systemet", 401);
+        }
         
         var newCustomer =  new Domain.Entities.Customer()
         {
@@ -49,9 +62,10 @@ public class CustomerService : ICustomerService
             County = createCustomerRequestDto.County,
             Email = createCustomerRequestDto.Email,
             PhoneNumber = createCustomerRequestDto.PhoneNumber,
-            BusinessId = new Guid(), // GET THE BUSINESSID OF THE USER
+            BusinessId = currentUser.BusinessId,
             StatusId = createCustomerRequestDto.StatusId,
-            // ADD CREATEDBY AND THE OTHERS
+            CreatedBy = currentUser.Id,
+            CreatedOn = DateTime.UtcNow
         };
         await _customerRepository.Add(newCustomer);
         
