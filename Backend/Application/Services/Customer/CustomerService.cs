@@ -35,15 +35,20 @@ public class CustomerService : ICustomerService
         {
             return Result<CreateCustomerResponseDto>.Failure("Bedriften er allerede registrert", 409);
         }
+
+        if (createCustomerRequestDto.OrganizationNr is not null)
+        {
+            if (await CheckOrganizationNrUnique(createCustomerRequestDto.OrganizationNr.Value))
+            {
+                return Result<CreateCustomerResponseDto>.Failure("Organisasjonsnummeret er allerede registrert", 409);
+            }
+        }
         
         if (!await StatusExists(createCustomerRequestDto.StatusId))
         {
             return Result<CreateCustomerResponseDto>.Failure("Valgt status finnes ikke i vårt system", 404);
         }
-
-        var test = _currentUserService.UserId;
         
-
         var currentUser = await _currentUserService.GetUser();
 
         if (currentUser is null)
@@ -82,6 +87,11 @@ public class CustomerService : ICustomerService
     private async Task<bool> CheckCustomerNameUnique(string customerName)
     {
         return await _customerRepository.CheckCustomerNameExists(customerName);
+    }
+
+    private async Task<bool> CheckOrganizationNrUnique(int organizationNr)
+    {
+        return await _customerRepository.CheckOrgNrExists(organizationNr);
     }
 
 }

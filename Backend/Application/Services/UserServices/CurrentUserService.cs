@@ -23,6 +23,8 @@ public class CurrentUserService : ICurrentUserService
     public string UserName => User?.Identity?.Name!;
     
     public string Role => User.FindFirst(ClaimTypes.Role)?.Value!;
+    
+    public Guid BusinessId => Guid.Parse(User.FindFirst("businessId")?.Value!);
 
     public async Task<User?> GetUser()
     {

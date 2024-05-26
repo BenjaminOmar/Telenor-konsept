@@ -16,7 +16,7 @@ public class CustomerController : ControllerBase
         _customerService = customerService;
     }
     
-    //[Authorize]
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetCustomer()
     {
@@ -30,7 +30,7 @@ public class CustomerController : ControllerBase
         return BadRequest("Error ved henting av kundeliste");
     }
     
-    //[Authorize]
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerRequestDto customerRequestDto)
     {

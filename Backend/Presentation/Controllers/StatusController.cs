@@ -1,4 +1,5 @@
 using Domain.Interfaces.Services.Status;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers;
@@ -9,7 +10,7 @@ public class StatusController(IStatusService statusService) : ControllerBase
 {
     private readonly IStatusService _statusService = statusService;
     
-    //[Authorize]
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetStatuses()
     {

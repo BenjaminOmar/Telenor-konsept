@@ -9,6 +9,8 @@ public interface ICurrentUserService
     string UserName { get; }
     
     string Role { get; }
+    
+    Guid BusinessId { get; }
 
     Task<Entities.User?> GetUser();
 }
