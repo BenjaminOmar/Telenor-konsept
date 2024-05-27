@@ -1,4 +1,5 @@
 using AutoMapper;
+using Domain.Consts;
 using Domain.DTOs.Customer;
 using Domain.Helpers;
 using Domain.Interfaces.Repositories;
@@ -44,11 +45,6 @@ public class CustomerService : ICustomerService
             }
         }
         
-        if (!await StatusExists(createCustomerRequestDto.StatusId))
-        {
-            return Result<CreateCustomerResponseDto>.Failure("Valgt status finnes ikke i vårt system", 404);
-        }
-        
         var currentUser = await _currentUserService.GetUser();
 
         if (currentUser is null)
@@ -68,7 +64,7 @@ public class CustomerService : ICustomerService
             Email = createCustomerRequestDto.Email,
             PhoneNumber = createCustomerRequestDto.PhoneNumber,
             BusinessId = currentUser.BusinessId,
-            StatusId = createCustomerRequestDto.StatusId,
+            StatusId = StatusConsts.LEAD_STATUS_ID,
             CreatedBy = currentUser.Id,
             CreatedOn = DateTime.UtcNow
         };

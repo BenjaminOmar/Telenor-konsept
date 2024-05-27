@@ -17,6 +17,4 @@ public class CreateCustomerRequestDto
     public string? Email { get; set; }
     
     public string? PhoneNumber { get; set; }
-    
-    public Guid StatusId { get; set; }
 }

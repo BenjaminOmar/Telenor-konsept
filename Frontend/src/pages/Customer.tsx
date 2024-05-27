@@ -4,12 +4,13 @@ import {View, StyleSheet} from 'react-native';
 import CustomerList from '../components/customer/CustomerList';
 import SearchInput from '../components/common/inputs/SearchInput';
 import NewCustomerModal from '../components/customer/NewCustomerModal'; // Import the new modal component
+import axios from 'axios';
 
 function Customer() {
   const [modalVisible, setModalVisible] = useState(false);
   const [customerName, setCustomerName] = useState('');
 
-  const handleAddButtonPress = () => {
+  const handleAddButtonPress = async () => {
     setModalVisible(true);
   };
 
