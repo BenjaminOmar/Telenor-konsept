@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import SearchInput from '../common/inputs/SearchInput';
 import {Button} from '@rneui/base';
+import axios from 'axios';
 
 interface Props {
   modalVisible: boolean;
@@ -41,42 +42,22 @@ const NewCustomerModal: React.FC<Props> = ({
       phoneNumber,
     };
 
-    const requestOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(customerData),
-    };
-
-    console.log(requestOptions);
-
     try {
-      const response = await fetch(
+      const response = await axios.post(
         'http://localhost:3000/api/customer',
-        requestOptions,
+        customerData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
       );
 
-      if (!response.ok) {
-        const errorText = await response;
-        console.error('Failed to create customer:', errorText);
-        return;
-      }
-
-      let data;
-      try {
-        data = await response.json();
-      } catch (error) {
-        console.error('Error parsing JSON:', error);
-        data = null; // or set to an appropriate default value
-      }
-
-      if (data) {
-        console.log('Customer created successfully:', data);
-      }
+      const data = response.data;
+      console.log('Kunde er laget:', data);
       handleCloseModal();
     } catch (error) {
-      console.error('Error creating customer:', error);
+      console.error('Feilet med å lage kunde::', error);
     }
   };
 
