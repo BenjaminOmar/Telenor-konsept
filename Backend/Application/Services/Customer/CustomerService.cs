@@ -78,6 +78,12 @@ public class CustomerService : ICustomerService
         return Result<CreateCustomerResponseDto>.Success(responseDto);
     }
 
+    public async Task<Result<CustomerOptionsResponseDto>> GetCustomerOptions()
+    {
+        var statuses = _mapper.Map<CustomerOptionsResponseDto>(await _statusRepository.GetAll());
+        return Result<CustomerOptionsResponseDto>.Success(statuses);
+    }
+
     private async Task<bool> StatusExists(Guid statusId)
     {
         var status = await _statusRepository.GetById(statusId);

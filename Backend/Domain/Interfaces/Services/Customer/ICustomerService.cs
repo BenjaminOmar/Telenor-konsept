@@ -8,4 +8,5 @@ public interface ICustomerService
     Task<Result<List<CustomerListResponseDto>>> GetCustomerList();
 
     Task<Result<CreateCustomerResponseDto>> CreateCustomer(CreateCustomerRequestDto createCustomerRequestDto);
+    Task<Result<CustomerOptionsResponseDto>> GetCustomerOptions();
 }

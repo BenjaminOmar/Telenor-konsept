@@ -55,6 +55,13 @@ public class CustomerController : ControllerBase
     [HttpGet("options")]
     public async Task<IActionResult> GetCreateCustomerOptions()
     {
-        return Ok();
+        var result = await _customerService.GetCustomerOptions();
+
+        if (result.Value.Status is null)
+        {
+            return Empty;
+        }
+        
+        return Ok(result);
     }
 }
