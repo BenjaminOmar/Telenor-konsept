@@ -51,6 +51,8 @@ public class CustomerController : ControllerBase
         return Ok(result.Value.Name + " " + "er oprettet");
     }
 
+    [Authorize]
+    [HttpGet("options")]
     public async Task<IActionResult> GetCreateCustomerOptions()
     {
         return Ok();
