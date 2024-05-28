@@ -69,8 +69,7 @@ function Customer() {
           name="CustomerDetails"
           component={CustomerDetails}
           options={{
-            headerShown: true,
-            title: 'Customer Details',
+            headerShown: false,
           }}
         />
       </CustomerStack.Navigator>
