@@ -1,22 +1,23 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-
-import Logo from '../assets/images/telenor-logo.png';
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import Login from './pages/Login';
 import {AuthProvider, useAuth} from './context/authContext';
 import Home from './pages/Home';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import CustomerDetails from './pages/CustomerDetails';
+import CustomerList from './components/customer/CustomerList';
+import {StackParamList} from './routing/StackNavigatiorConfig';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<StackParamList>();
 
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <AuthProvider>
-      <Layout></Layout>
+      <Layout />
     </AuthProvider>
   );
 };
@@ -40,6 +41,15 @@ export const Layout = () => {
               component={Login}
             />
           )}
+          <Stack.Screen
+            name="CustomerDetails"
+            component={CustomerDetails}
+            options={{
+              headerShown: true,
+              animation: 'slide_from_right',
+              title: 'Customer Details',
+            }}
+          />
         </Stack.Navigator>
       </QueryClientProvider>
     </SafeAreaProvider>
