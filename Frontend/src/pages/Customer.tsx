@@ -1,10 +1,20 @@
-import {Button} from '@rneui/base';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
+import {Button} from '@rneui/base';
 import CustomerList from '../components/customer/CustomerList';
 import SearchInput from '../components/common/inputs/SearchInput';
-import NewCustomerModal from '../components/customer/NewCustomerModal'; // Import the new modal component
-import axios from 'axios';
+import NewCustomerModal from '../components/customer/NewCustomerModal';
+import CustomerDetails from './CustomerDetails';
+import {CustomerInterface} from '../models/customer/CustomerInterface';
+
+type CustomerStackParamList = {
+  CustomerList: undefined;
+  CustomerDetails: {customer: CustomerInterface};
+};
+
+const CustomerStack = createNativeStackNavigator<CustomerStackParamList>();
 
 function Customer() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -19,34 +29,52 @@ function Customer() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.customerHeader}>
-        <View style={styles.searchInput}>
-          <SearchInput
-            value={customerName}
-            setValue={setCustomerName}
-            placeholder="Søk etter bedrift"
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            icon={{
-              name: 'add',
-              type: 'material',
-              size: 25,
-              color: 'white',
-            }}
-            buttonStyle={styles.addButton}
-            onPress={handleAddButtonPress}
-          />
-        </View>
-      </View>
-      <CustomerList search={customerName} />
-      <NewCustomerModal
-        modalVisible={modalVisible}
-        handleCloseModal={handleCloseModal}
-      />
-    </View>
+    <NavigationContainer independent={true}>
+      <CustomerStack.Navigator initialRouteName="CustomerList">
+        <CustomerStack.Screen
+          name="CustomerList"
+          options={{headerShown: false}}>
+          {() => (
+            <View style={styles.container}>
+              <View style={styles.customerHeader}>
+                <View style={styles.searchInput}>
+                  <SearchInput
+                    value={customerName}
+                    setValue={setCustomerName}
+                    placeholder="Søk etter bedrift"
+                  />
+                </View>
+                <View style={styles.buttonContainer}>
+                  <Button
+                    icon={{
+                      name: 'add',
+                      type: 'material',
+                      size: 25,
+                      color: 'white',
+                    }}
+                    buttonStyle={styles.addButton}
+                    onPress={handleAddButtonPress}
+                  />
+                </View>
+              </View>
+              <CustomerList search={customerName} />
+              <NewCustomerModal
+                modalVisible={modalVisible}
+                handleCloseModal={handleCloseModal}
+              />
+            </View>
+          )}
+        </CustomerStack.Screen>
+        <CustomerStack.Screen
+          name="CustomerDetails"
+          component={CustomerDetails}
+          options={{
+            headerShown: true,
+            title: 'Customer Details',
+          }}
+        />
+      </CustomerStack.Navigator>
+    </NavigationContainer>
   );
 }
 

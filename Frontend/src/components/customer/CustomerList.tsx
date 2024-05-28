@@ -13,7 +13,7 @@ import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {StackParamList} from '../../routing/StackNavigatiorConfig';
-import {Customer} from '../../models/customer/customer';
+import {CustomerInterface} from '../../models/customer/CustomerInterface';
 
 interface CustomerListProps {
   search: string;
@@ -25,7 +25,7 @@ type CustomerListNavigationProp = NativeStackNavigationProp<
 >;
 
 const CustomerList: React.FC<CustomerListProps> = ({search}) => {
-  const [data, setData] = useState<Customer[]>([]);
+  const [data, setData] = useState<CustomerInterface[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const navigation = useNavigation<CustomerListNavigationProp>();
@@ -52,7 +52,7 @@ const CustomerList: React.FC<CustomerListProps> = ({search}) => {
     fetchData();
   };
 
-  const renderItem = ({item}: {item: Customer}) => (
+  const renderItem = ({item}: {item: CustomerInterface}) => (
     <TouchableOpacity
       style={styles.itemContainer}
       onPress={() => navigation.navigate('CustomerDetails', {customer: item})}>

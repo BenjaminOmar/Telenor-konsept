@@ -18,7 +18,6 @@ const CustomerDetails: React.FC<Props> = ({route}) => {
     <View style={styles.container}>
       <Text style={styles.name}>Name: {customer.name}</Text>
       <Text style={styles.id}>ID: {customer.customerId}</Text>
-      {/* Add more customer details here */}
     </View>
   );
 };

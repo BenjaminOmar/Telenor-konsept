@@ -41,15 +41,6 @@ export const Layout = () => {
               component={Login}
             />
           )}
-          <Stack.Screen
-            name="CustomerDetails"
-            component={CustomerDetails}
-            options={{
-              headerShown: true,
-              animation: 'slide_from_right',
-              title: 'Customer Details',
-            }}
-          />
         </Stack.Navigator>
       </QueryClientProvider>
     </SafeAreaProvider>
