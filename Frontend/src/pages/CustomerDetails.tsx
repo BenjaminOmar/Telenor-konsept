@@ -1,9 +1,8 @@
-// CustomerDetails.tsx
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {ScrollView, View, Text, StyleSheet} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {StackParamList} from '../routing/StackNavigatiorConfig';
+import DetailsCard from '../components/customer/cards/DetailsCard';
 
 type CustomerDetailsRouteProp = RouteProp<StackParamList, 'CustomerDetails'>;
 
@@ -16,8 +15,11 @@ const CustomerDetails: React.FC<Props> = ({route}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.name}>Name: {customer.name}</Text>
-      <Text style={styles.id}>ID: {customer.customerId}</Text>
+      <Text style={styles.headerText}>{customer.name}</Text>
+      <View style={styles.divider} />
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <DetailsCard details={customer} />
+      </ScrollView>
     </View>
   );
 };
@@ -25,17 +27,23 @@ const CustomerDetails: React.FC<Props> = ({route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 16,
   },
-  name: {
-    fontSize: 24,
+  headerText: {
+    textAlign: 'center',
+    fontSize: 34,
     fontWeight: 'bold',
+    color: '#00ACE7',
   },
-  id: {
-    fontSize: 18,
-    marginTop: 8,
+  divider: {
+    width: '80%',
+    height: 3,
+    borderRadius: 10,
+    alignSelf: 'center',
+    backgroundColor: '#CED0CE',
+    marginVertical: 5,
+  },
+  scrollViewContent: {
+    padding: 10,
   },
 });
 
