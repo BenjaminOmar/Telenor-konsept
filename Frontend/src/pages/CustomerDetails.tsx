@@ -11,6 +11,7 @@ import {StackParamList} from '../routing/StackNavigatiorConfig';
 import DetailsCard from '../components/customer/cards/DetailsCard';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Ionicons';
+import FinancialCard from '../components/customer/cards/FinancialCard';
 
 type CustomerDetailsRouteProp = RouteProp<StackParamList, 'CustomerDetails'>;
 type CustomerDetailsNavigationProp = NativeStackNavigationProp<
@@ -43,6 +44,7 @@ const CustomerDetails: React.FC<Props> = ({route}) => {
       <View style={styles.divider} />
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <DetailsCard details={customer} />
+        <FinancialCard />
       </ScrollView>
     </View>
   );

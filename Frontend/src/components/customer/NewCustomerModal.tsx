@@ -30,9 +30,13 @@ const NewCustomerModal: React.FC<Props> = ({
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isBusiness, setIsBusiness] = useState(true);
 
+  const capitalizeFirstLetter = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   const handleCreateCustomer = async () => {
     const customerData = {
-      name,
+      name: capitalizeFirstLetter(name.trim()),
       isPrivateCustomer: !isBusiness, // send the opposite of isBusiness
       organizationNr: isBusiness ? organizationNr : undefined,
       address,

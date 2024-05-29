@@ -15,10 +15,6 @@ const DetailsCard: React.FC<DetailsCardProps> = ({details}) => {
         <Text style={styles.value}>{details.customerNumber}</Text>
       </View>
       <View style={styles.infoRow}>
-        <Text style={styles.label}>Navn:</Text>
-        <Text style={styles.value}>{details.name}</Text>
-      </View>
-      <View style={styles.infoRow}>
         <Text style={styles.label}>Privat kunde:</Text>
         <Text style={styles.value}>
           {details.isPrivateCustomer ? 'Ja' : 'Nei'}
