@@ -34,10 +34,21 @@ const NewCustomerModal: React.FC<Props> = ({
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
+  const resetForm = () => {
+    setName('');
+    setOrganizationNr('');
+    setAddress('');
+    setPostCode('');
+    setCounty('');
+    setEmail('');
+    setPhoneNumber('');
+    setIsBusiness(true);
+  };
+
   const handleCreateCustomer = async () => {
     const customerData = {
       name: capitalizeFirstLetter(name.trim()),
-      isPrivateCustomer: !isBusiness, // send the opposite of isBusiness
+      isPrivateCustomer: !isBusiness,
       organizationNr: isBusiness ? organizationNr : undefined,
       address,
       postCode,
@@ -59,6 +70,7 @@ const NewCustomerModal: React.FC<Props> = ({
 
       const data = response.data;
       console.log('Kunde er laget:', data);
+      resetForm();
       handleCloseModal();
     } catch (error) {
       console.error('Feilet med å lage kunde::', error);
@@ -66,6 +78,7 @@ const NewCustomerModal: React.FC<Props> = ({
   };
 
   const handleCancel = () => {
+    resetForm();
     handleCloseModal();
   };
 
@@ -102,6 +115,20 @@ const NewCustomerModal: React.FC<Props> = ({
                       placeholder="Navn"
                     />
                   </View>
+                  <View style={styles.formFieldItem}>
+                    <SearchInput
+                      value={phoneNumber}
+                      setValue={setPhoneNumber}
+                      placeholder="Telefonnummer"
+                    />
+                  </View>
+                  <View style={styles.formFieldItem}>
+                    <SearchInput
+                      value={email}
+                      setValue={setEmail}
+                      placeholder="Epost"
+                    />
+                  </View>
                   {isBusiness && (
                     <View style={styles.formFieldItem}>
                       <SearchInput
@@ -131,20 +158,6 @@ const NewCustomerModal: React.FC<Props> = ({
                     value={county}
                     setValue={setCounty}
                     placeholder="Fylke"
-                  />
-                </View>
-                <View style={styles.formFieldItem}>
-                  <SearchInput
-                    value={email}
-                    setValue={setEmail}
-                    placeholder="Epost"
-                  />
-                </View>
-                <View style={styles.formFieldItem}>
-                  <SearchInput
-                    value={phoneNumber}
-                    setValue={setPhoneNumber}
-                    placeholder="Telefonnummer"
                   />
                 </View>
               </ScrollView>

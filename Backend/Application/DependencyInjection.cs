@@ -27,6 +27,7 @@ namespace Application
             services.AddScoped<IBusinessService, BusinessService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IStatusService, StatusService>();
+            services.AddScoped<IBrregService, BrregService>();
             return services;
         }
     }

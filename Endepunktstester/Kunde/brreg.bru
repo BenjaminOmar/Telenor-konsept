@@ -1,0 +1,33 @@
+meta {
+  name: brreg
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:3000/api/customer/brreg?name=kuba norge&organizationNumber
+  body: json
+  auth: bearer
+}
+
+query {
+  name: kuba norge
+  organizationNumber: 
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImJlbmphbWluMTIzNDUiLCJuYW1laWQiOiI1NTg0NDk0OC03OGJkLTRhNzYtYWRhNy05ZjhjNGRlOWMxZDAiLCJyb2xlIjoiVXNlciIsImJ1c2luZXNzSWQiOiJlM2VhZDAxNi0xZjYxLTRkYzktYjBmMS0xZjRlZTJmMjdjMTYiLCJuYmYiOjE3MTcwMTA0MTUsImV4cCI6MTcxNzA0NjQxNSwiaWF0IjoxNzE3MDEwNDE1LCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDozMDAwIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6MzAwMCJ9.uSHN0mChpdjd8FJNLgGpIHY974ipStwWk700aADJJB8
+}
+
+body:json {
+  {
+    "name": "daadada",
+    "isPrivateCustomer": isBusiness,
+    "organizationNr": 12231,
+    "address": "dasdasd",
+    "postCode": 0,
+    "county": "asdadasd",
+    "email": "befriddef",
+    "phoneNumber": "string",
+  }
+}
