@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import HeaderMenu from './HeaderMenu';
 import {useHeader} from '../../context/HeaderContext';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const truncateTitle = (title: string, maxLength: number) => {
   return title.length > maxLength
@@ -26,7 +27,7 @@ const Header: React.FC = () => {
         <View style={styles.headerTitleContainer}>
           {showGoBack && handleGoBack && (
             <TouchableOpacity onPress={handleGoBack} style={styles.backButton}>
-              <Text style={styles.backButtonText}>Go Back</Text>
+              <Icon name="arrow-back" size={34} color="#00ACE7" />
             </TouchableOpacity>
           )}
           <Text style={styles.headerText}>{truncatedTitle}</Text>
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: 10,
-    marginBottom: 20,
+    marginBottom: 5,
   },
   headerTitleContainer: {
     flexDirection: 'row',
