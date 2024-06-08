@@ -12,6 +12,7 @@ import DetailsCard from '../components/customer/cards/DetailsCard';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FinancialCard from '../components/customer/cards/FinancialCard';
+import CustomerDetailsDevider from '../components/customer/CustomerDetailsDevider';
 
 type CustomerDetailsRouteProp = RouteProp<StackParamList, 'CustomerDetails'>;
 type CustomerDetailsNavigationProp = NativeStackNavigationProp<
@@ -32,21 +33,24 @@ const CustomerDetails: React.FC<Props> = ({route}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <View style={styles.headerContent}>
-          <TouchableOpacity onPress={handleGoBack} style={styles.backButton}>
-            <Icon name="arrow-back" size={34} color="#00ACE7" />
-          </TouchableOpacity>
-          <Text style={styles.headerText}>{customer.name}</Text>
+    <>
+      <Text></Text>
+      <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <View style={styles.headerContent}>
+            <TouchableOpacity onPress={handleGoBack} style={styles.backButton}>
+              <Icon name="arrow-back" size={34} color="#00ACE7" />
+            </TouchableOpacity>
+            <Text style={styles.headerText}>{customer.name}</Text>
+          </View>
         </View>
+        <CustomerDetailsDevider />
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+          <DetailsCard details={customer} />
+          <FinancialCard />
+        </ScrollView>
       </View>
-      <View style={styles.divider} />
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
-        <DetailsCard details={customer} />
-        <FinancialCard />
-      </ScrollView>
-    </View>
+    </>
   );
 };
 
