@@ -1,6 +1,7 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import {CustomerInterface} from '../../../models/customer/CustomerInterface';
+import CustomerDetailsDevider from '../CustomerDetailsDevider';
 
 interface DetailsCardProps {
   details: CustomerInterface;
@@ -8,8 +9,9 @@ interface DetailsCardProps {
 
 const DetailsCard: React.FC<DetailsCardProps> = ({details}) => {
   return (
-    <View style={styles.card}>
+    <View style={styles.container}>
       <Text style={styles.title}>Kundeinformasjon</Text>
+      <CustomerDetailsDevider />
       <View style={styles.infoRow}>
         <Text style={styles.label}>Kundenummer:</Text>
         <Text style={styles.value}>{details.customerNumber}</Text>
@@ -35,24 +37,13 @@ const DetailsCard: React.FC<DetailsCardProps> = ({details}) => {
 };
 
 const styles = StyleSheet.create({
-  card: {
-    width: '90%',
-    padding: 20,
-    marginVertical: 10,
-    marginHorizontal: '5%',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
+  container: {
+    paddingHorizontal: 20,
   },
   title: {
     fontSize: 25,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 10,
   },
   infoRow: {
     flexDirection: 'row',

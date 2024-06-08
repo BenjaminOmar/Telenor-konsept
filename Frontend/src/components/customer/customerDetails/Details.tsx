@@ -6,10 +6,8 @@ import CustomerDetailsDevider from '../CustomerDetailsDevider';
 import DetailsCard from '../cards/DetailsCard';
 import FinancialCard from '../cards/FinancialCard';
 
-type DetailsRouteProp = RouteProp<StackParamList, 'CustomerDetails'>;
-
 type Props = {
-  route: DetailsRouteProp;
+  route: RouteProp<StackParamList, 'CustomerDetails'>;
 };
 
 const Details: React.FC<Props> = ({route}) => {
@@ -17,6 +15,11 @@ const Details: React.FC<Props> = ({route}) => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        <View style={styles.headerContent}>
+          <Text style={styles.headerText}>{customer.name}</Text>
+        </View>
+      </View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <DetailsCard details={customer} />
         <FinancialCard />
@@ -32,28 +35,16 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 10,
+    paddingTop: 10,
   },
   headerContent: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  backButton: {
-    marginRight: 10,
-    marginLeft: -30,
-  },
   headerText: {
     fontSize: 34,
     fontWeight: 'bold',
     color: '#00ACE7',
-  },
-  divider: {
-    width: '80%',
-    height: 3,
-    borderRadius: 10,
-    alignSelf: 'center',
-    backgroundColor: '#CED0CE',
-    marginVertical: 5,
   },
   scrollViewContent: {
     padding: 10,

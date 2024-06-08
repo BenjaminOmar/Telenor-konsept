@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 5,
     backgroundColor: '#ffffff',
-    borderRadius: 8,
+    borderRadius: 12,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,

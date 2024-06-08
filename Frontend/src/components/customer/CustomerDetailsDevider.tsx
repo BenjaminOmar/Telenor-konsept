@@ -7,12 +7,13 @@ const CustomerDetailsDevider = () => {
 
 const styles = StyleSheet.create({
   divider: {
-    width: '80%',
+    width: '100%',
     height: 3,
     borderRadius: 10,
     alignSelf: 'center',
     backgroundColor: '#CED0CE',
-    marginVertical: 5,
+    marginTop: 2,
+    marginBottom: 10,
   },
 });
 

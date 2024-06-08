@@ -42,7 +42,12 @@ const CustomerDetails: React.FC<Props> = ({route}) => {
           tabBarActiveTintColor: styles.tabBarActiveTintColor.color,
           tabBarInactiveTintColor: styles.tabBarInactiveTintColor.color,
         }}>
-        <Tab.Screen name="Om" component={Details} initialParams={{customer}} />
+        <Tab.Screen
+          name="Om"
+          component={Details}
+          initialParams={{customer}}
+          options={{title: 'Om'}}
+        />
         <Tab.Screen name="Oppgaver" component={Tasks} />
         <Tab.Screen name="Salg" component={Sales} />
       </Tab.Navigator>
