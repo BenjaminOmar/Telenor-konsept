@@ -380,7 +380,7 @@ namespace Infrastructure.Migrations
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
                             CreatedOn = new DateTime(2024, 5, 24, 20, 29, 55, 350, DateTimeKind.Utc).AddTicks(8400),
                             IsDeleted = false,
-                            Name = "User"
+                            Name = "UserServices"
                         },
                         new
                         {
@@ -466,7 +466,7 @@ namespace Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Domain.Entities.User", b =>
+            modelBuilder.Entity("Domain.Entities.UserServices", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -527,7 +527,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("UserServices", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Customer", b =>
@@ -549,7 +549,7 @@ namespace Infrastructure.Migrations
                     b.Navigation("Status");
                 });
 
-            modelBuilder.Entity("Domain.Entities.User", b =>
+            modelBuilder.Entity("Domain.Entities.UserServices", b =>
                 {
                     b.HasOne("Domain.Entities.Business", "Business")
                         .WithMany("Users")

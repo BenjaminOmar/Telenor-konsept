@@ -1,4 +1,4 @@
-namespace Presentation.DTOs.Authentication;
+namespace Domain.DTOs.Authentication;
 
 public class LoginRequestDto
 {

@@ -10,7 +10,7 @@ public class BusinessController(IBusinessService businessService) : ControllerBa
 {
     private readonly IBusinessService _businessService = businessService;
 
-    //[Authorize]
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetBusinessList()
     {

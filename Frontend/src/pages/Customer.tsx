@@ -1,22 +1,26 @@
-import {Button} from '@rneui/base';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  Modal,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import {View, StyleSheet} from 'react-native';
+import {Button} from '@rneui/base';
 import CustomerList from '../components/customer/CustomerList';
-import CustomInput from '../components/common/inputs/CustomInput';
 import SearchInput from '../components/common/inputs/SearchInput';
+import NewCustomerModal from '../components/customer/NewCustomerModal';
+import CustomerDetails from './CustomerDetails';
+import {CustomerInterface} from '../models/customer/CustomerInterface';
+
+type CustomerStackParamList = {
+  CustomerList: undefined;
+  CustomerDetails: {customer: CustomerInterface};
+};
+
+const CustomerStack = createNativeStackNavigator<CustomerStackParamList>();
 
 function Customer() {
   const [modalVisible, setModalVisible] = useState(false);
   const [customerName, setCustomerName] = useState('');
 
-  const handleAddButtonPress = () => {
+  const handleAddButtonPress = async () => {
     setModalVisible(true);
   };
 
@@ -25,45 +29,51 @@ function Customer() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.customerHeader}>
-        <View style={styles.searchInput}>
-          <SearchInput
-            value={customerName}
-            setValue={setCustomerName}
-            placeholder="Søk etter bedrift"
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Button
-            icon={{
-              name: 'add',
-              type: 'material',
-              size: 25,
-              color: 'white',
-            }}
-            buttonStyle={styles.addButton}
-            onPress={handleAddButtonPress}
-          />
-        </View>
-      </View>
-      <CustomerList search={customerName} />
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={handleCloseModal}>
-        <TouchableWithoutFeedback onPress={handleCloseModal}>
-          <View style={styles.modalOverlay}>
-            <TouchableWithoutFeedback onPress={() => {}}>
-              <View style={styles.modalContent}>
-                <Text style={styles.headerText}>Ny bedrift</Text>
+    <NavigationContainer independent={true}>
+      <CustomerStack.Navigator initialRouteName="CustomerList">
+        <CustomerStack.Screen
+          name="CustomerList"
+          options={{headerShown: false}}>
+          {() => (
+            <View style={styles.container}>
+              <View style={styles.customerHeader}>
+                <View style={styles.searchInput}>
+                  <SearchInput
+                    value={customerName}
+                    setValue={setCustomerName}
+                    placeholder="Søk etter bedrift"
+                  />
+                </View>
+                <View style={styles.buttonContainer}>
+                  <Button
+                    icon={{
+                      name: 'add',
+                      type: 'material',
+                      size: 25,
+                      color: 'white',
+                    }}
+                    buttonStyle={styles.addButton}
+                    onPress={handleAddButtonPress}
+                  />
+                </View>
               </View>
-            </TouchableWithoutFeedback>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-    </View>
+              <CustomerList search={customerName} />
+              <NewCustomerModal
+                modalVisible={modalVisible}
+                handleCloseModal={handleCloseModal}
+              />
+            </View>
+          )}
+        </CustomerStack.Screen>
+        <CustomerStack.Screen
+          name="CustomerDetails"
+          component={CustomerDetails}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </CustomerStack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -90,27 +100,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: 80,
     height: 47,
-  },
-  modalOverlay: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#00ACE7',
-    marginBottom: 20,
-    marginTop: 10,
-  },
-  modalContent: {
-    width: '80%',
-    height: '70%',
-    padding: 20,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    alignItems: 'center',
   },
 });
 

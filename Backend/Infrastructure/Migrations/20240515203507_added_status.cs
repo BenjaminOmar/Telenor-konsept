@@ -69,7 +69,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "UserServices",
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -153,7 +153,7 @@ namespace Infrastructure.Migrations
                 columns: new[] { "RoleId", "CreatedBy", "CreatedOn", "IsDeleted", "ModifiedBy", "ModifiedOn", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("ccafb929-aa82-4981-96f9-53864b688c89"), new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"), new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(6140), false, null, null, "User" },
+                    { new Guid("ccafb929-aa82-4981-96f9-53864b688c89"), new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"), new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(6140), false, null, null, "UserServices" },
                     { new Guid("dd5a13da-11e4-4554-a697-76a4102fd72e"), new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"), new DateTime(2024, 5, 15, 20, 35, 6, 844, DateTimeKind.Utc).AddTicks(6140), false, null, null, "Admin" }
                 });
 
@@ -208,17 +208,17 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_BusinessId",
-                table: "User",
+                table: "UserServices",
                 column: "BusinessId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_RoleId",
-                table: "User",
+                table: "UserServices",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_Username",
-                table: "User",
+                table: "UserServices",
                 column: "Username",
                 unique: true);
         }
@@ -230,7 +230,7 @@ namespace Infrastructure.Migrations
                 name: "Customer");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "UserServices");
 
             migrationBuilder.DropTable(
                 name: "Status");

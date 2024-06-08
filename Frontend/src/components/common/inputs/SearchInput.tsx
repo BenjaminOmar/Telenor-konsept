@@ -16,6 +16,7 @@ const SearchInput: React.FC<Props> = ({value, setValue, placeholder}) => {
         style={styles.input}
         placeholder={placeholder}
         autoCapitalize="none"
+        placeholderTextColor="#888"
       />
     </View>
   );

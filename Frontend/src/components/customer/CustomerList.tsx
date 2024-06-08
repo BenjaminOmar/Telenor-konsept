@@ -1,3 +1,4 @@
+// CustomerList.tsx
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -6,22 +7,28 @@ import {
   FlatList,
   ActivityIndicator,
   RefreshControl,
+  TouchableOpacity,
 } from 'react-native';
 import axios from 'axios';
-
-interface Customer {
-  customerId: number;
-  name: string;
-}
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {StackParamList} from '../../routing/StackNavigatiorConfig';
+import {CustomerInterface} from '../../models/customer/CustomerInterface';
 
 interface CustomerListProps {
   search: string;
 }
 
+type CustomerListNavigationProp = NativeStackNavigationProp<
+  StackParamList,
+  'CustomerDetails'
+>;
+
 const CustomerList: React.FC<CustomerListProps> = ({search}) => {
-  const [data, setData] = useState<Customer[]>([]);
+  const [data, setData] = useState<CustomerInterface[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const navigation = useNavigation<CustomerListNavigationProp>();
 
   useEffect(() => {
     fetchData();
@@ -45,10 +52,12 @@ const CustomerList: React.FC<CustomerListProps> = ({search}) => {
     fetchData();
   };
 
-  const renderItem = ({item}: {item: Customer}) => (
-    <View style={styles.itemContainer}>
+  const renderItem = ({item}: {item: CustomerInterface}) => (
+    <TouchableOpacity
+      style={styles.itemContainer}
+      onPress={() => navigation.navigate('CustomerDetails', {customer: item})}>
       <Text style={styles.itemText}>{item.name}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   if (loading) {
@@ -59,7 +68,6 @@ const CustomerList: React.FC<CustomerListProps> = ({search}) => {
     );
   }
 
-  // Filter data based on the filterValue prop
   const filteredData = data.filter(item =>
     item.name.toLowerCase().includes(search.toLowerCase()),
   );
@@ -95,7 +103,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 5,
     backgroundColor: '#ffffff',
-    borderRadius: 8,
+    borderRadius: 12,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,

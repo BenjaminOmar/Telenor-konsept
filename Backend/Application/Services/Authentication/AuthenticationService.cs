@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Application.RepositoryInterfaces;
+using Domain.DTOs.Authentication;
 using Domain.Entities;
 using Domain.Helpers;
 using Microsoft.AspNetCore.Http;
@@ -122,7 +123,8 @@ namespace Application.Services.Authentication
             {
                 new (ClaimTypes.Name, user.Username),
                 new (ClaimTypes.NameIdentifier, user.Id.ToString()!),
-                new (ClaimTypes.Role, user.Role.Name)
+                new (ClaimTypes.Role, user.Role.Name),
+                new ("businessId", user.BusinessId.ToString())
             });
 
             SigningCredentials credentials = new(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);

@@ -1,4 +1,4 @@
-namespace Application.Services.Authentication;
+namespace Domain.DTOs.Authentication;
 
 public class IdTokenDto
 {

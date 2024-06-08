@@ -1,22 +1,26 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-
-import Logo from '../assets/images/telenor-logo.png';
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import Login from './pages/Login';
 import {AuthProvider, useAuth} from './context/authContext';
 import Home from './pages/Home';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import CustomerDetails from './pages/CustomerDetails';
+import CustomerList from './components/customer/CustomerList';
+import {StackParamList} from './routing/StackNavigatiorConfig';
+import {HeaderProvider} from './context/HeaderContext';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<StackParamList>();
 
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <AuthProvider>
-      <Layout></Layout>
+      <HeaderProvider>
+        <Layout />
+      </HeaderProvider>
     </AuthProvider>
   );
 };
