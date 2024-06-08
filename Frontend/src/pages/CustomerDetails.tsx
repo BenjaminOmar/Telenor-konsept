@@ -1,18 +1,12 @@
 import React from 'react';
-import {
-  ScrollView,
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import {StackParamList} from '../routing/StackNavigatiorConfig';
-import DetailsCard from '../components/customer/cards/DetailsCard';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import Icon from 'react-native-vector-icons/Ionicons';
-import FinancialCard from '../components/customer/cards/FinancialCard';
-import CustomerDetailsDevider from '../components/customer/CustomerDetailsDevider';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+import Details from '../components/customer/customerDetails/Details';
+import Tasks from './Tasks';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import Sales from '../components/customer/customerDetails/Sales';
 
 type CustomerDetailsRouteProp = RouteProp<StackParamList, 'CustomerDetails'>;
 type CustomerDetailsNavigationProp = NativeStackNavigationProp<
@@ -32,24 +26,26 @@ const CustomerDetails: React.FC<Props> = ({route}) => {
     navigation.goBack();
   };
 
+  const Tab = createMaterialTopTabNavigator();
+
   return (
     <>
-      <Text></Text>
-      <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <View style={styles.headerContent}>
-            <TouchableOpacity onPress={handleGoBack} style={styles.backButton}>
-              <Icon name="arrow-back" size={34} color="#00ACE7" />
-            </TouchableOpacity>
-            <Text style={styles.headerText}>{customer.name}</Text>
-          </View>
-        </View>
-        <CustomerDetailsDevider />
-        <ScrollView contentContainerStyle={styles.scrollViewContent}>
-          <DetailsCard details={customer} />
-          <FinancialCard />
-        </ScrollView>
+      <View style={styles.headerContent}>
+        <TouchableOpacity onPress={handleGoBack} style={styles.backButton}>
+          <Text>go back</Text>
+        </TouchableOpacity>
       </View>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarStyle: styles.tabBarStyle,
+          tabBarIndicatorStyle: styles.tabBarIndicatorStyle,
+          tabBarActiveTintColor: styles.tabBarActiveTintColor.color,
+          tabBarInactiveTintColor: styles.tabBarInactiveTintColor.color,
+        }}>
+        <Tab.Screen name="Om" component={Details} initialParams={{customer}} />
+        <Tab.Screen name="Oppgaver" component={Tasks} />
+        <Tab.Screen name="Salg" component={Sales} />
+      </Tab.Navigator>
     </>
   );
 };
@@ -86,6 +82,18 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     padding: 10,
+  },
+  tabBarStyle: {
+    backgroundColor: '#F0F0F0',
+  },
+  tabBarIndicatorStyle: {
+    backgroundColor: '#00ACE7',
+  },
+  tabBarActiveTintColor: {
+    color: '#000',
+  },
+  tabBarInactiveTintColor: {
+    color: '#888',
   },
 });
 
