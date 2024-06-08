@@ -15,11 +15,6 @@ const About: React.FC<Props> = ({route}) => {
 
   return (
     <View style={styles.container}>
-      {/* <View style={styles.headerContainer}>
-        <View style={styles.headerContent}>
-          <Text style={styles.headerText}>{customer.name}</Text>
-        </View>
-      </View> */}
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <DetailsCard details={customer} />
         <FinancialCard />

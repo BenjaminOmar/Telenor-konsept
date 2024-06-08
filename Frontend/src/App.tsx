@@ -9,6 +9,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import CustomerDetails from './pages/CustomerDetails';
 import CustomerList from './components/customer/CustomerList';
 import {StackParamList} from './routing/StackNavigatiorConfig';
+import {HeaderProvider} from './context/HeaderContext';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -17,7 +18,9 @@ const queryClient = new QueryClient();
 const App = () => {
   return (
     <AuthProvider>
-      <Layout />
+      <HeaderProvider>
+        <Layout />
+      </HeaderProvider>
     </AuthProvider>
   );
 };

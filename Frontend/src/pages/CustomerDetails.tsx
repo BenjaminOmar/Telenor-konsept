@@ -1,12 +1,18 @@
-import React from 'react';
+// src/components/CustomerDetails.tsx
+import React, {useEffect} from 'react';
 import {RouteProp, useNavigation} from '@react-navigation/native';
-import {StackParamList} from '../routing/StackNavigatiorConfig';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Tasks from './Tasks';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useHeader} from '../context/HeaderContext';
+import Tasks from './Tasks';
 import Sales from '../components/customer/customerDetails/Sales';
 import About from '../components/customer/customerDetails/About';
+import {CustomerInterface} from '../models/customer/CustomerInterface';
+
+type StackParamList = {
+  CustomerDetails: {customer: CustomerInterface};
+};
 
 type CustomerDetailsRouteProp = RouteProp<StackParamList, 'CustomerDetails'>;
 type CustomerDetailsNavigationProp = NativeStackNavigationProp<
@@ -14,13 +20,26 @@ type CustomerDetailsNavigationProp = NativeStackNavigationProp<
   'CustomerDetails'
 >;
 
-type Props = {
+interface Props {
   route: CustomerDetailsRouteProp;
-};
+}
 
 const CustomerDetails: React.FC<Props> = ({route}) => {
   const {customer} = route.params;
   const navigation = useNavigation<CustomerDetailsNavigationProp>();
+  const {setHeaderTitle, setShowGoBack, setHandleGoBack} = useHeader();
+
+  useEffect(() => {
+    setHeaderTitle(customer.name);
+    setShowGoBack(true);
+    setHandleGoBack(() => handleGoBack);
+
+    return () => {
+      setHeaderTitle('');
+      setShowGoBack(false);
+      setHandleGoBack(undefined);
+    };
+  }, [customer, setHeaderTitle, setShowGoBack, setHandleGoBack]);
 
   const handleGoBack = () => {
     navigation.goBack();
@@ -29,29 +48,22 @@ const CustomerDetails: React.FC<Props> = ({route}) => {
   const Tab = createMaterialTopTabNavigator();
 
   return (
-    <>
-      <View style={styles.headerContent}>
-        <TouchableOpacity onPress={handleGoBack} style={styles.backButton}>
-          <Text>go back</Text>
-        </TouchableOpacity>
-      </View>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarStyle: styles.tabBarStyle,
-          tabBarIndicatorStyle: styles.tabBarIndicatorStyle,
-          tabBarActiveTintColor: styles.tabBarActiveTintColor.color,
-          tabBarInactiveTintColor: styles.tabBarInactiveTintColor.color,
-        }}>
-        <Tab.Screen
-          name="Om"
-          component={About}
-          initialParams={{customer}}
-          options={{title: 'Om'}}
-        />
-        <Tab.Screen name="Oppgaver" component={Tasks} />
-        <Tab.Screen name="Salg" component={Sales} />
-      </Tab.Navigator>
-    </>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: styles.tabBarStyle,
+        tabBarIndicatorStyle: styles.tabBarIndicatorStyle,
+        tabBarActiveTintColor: styles.tabBarActiveTintColor.color,
+        tabBarInactiveTintColor: styles.tabBarInactiveTintColor.color,
+      }}>
+      <Tab.Screen
+        name="Om"
+        component={About}
+        initialParams={{customer}}
+        options={{title: 'Om'}}
+      />
+      <Tab.Screen name="Oppgaver" component={Tasks} />
+      <Tab.Screen name="Salg" component={Sales} />
+    </Tab.Navigator>
   );
 };
 
