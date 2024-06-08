@@ -3,10 +3,10 @@ import {RouteProp, useNavigation} from '@react-navigation/native';
 import {StackParamList} from '../routing/StackNavigatiorConfig';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Details from '../components/customer/customerDetails/Details';
 import Tasks from './Tasks';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Sales from '../components/customer/customerDetails/Sales';
+import About from '../components/customer/customerDetails/About';
 
 type CustomerDetailsRouteProp = RouteProp<StackParamList, 'CustomerDetails'>;
 type CustomerDetailsNavigationProp = NativeStackNavigationProp<
@@ -44,7 +44,7 @@ const CustomerDetails: React.FC<Props> = ({route}) => {
         }}>
         <Tab.Screen
           name="Om"
-          component={Details}
+          component={About}
           initialParams={{customer}}
           options={{title: 'Om'}}
         />

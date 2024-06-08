@@ -19,6 +19,7 @@ const FinancialCard = () => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
+    marginVertical: 10,
   },
   title: {
     fontSize: 25,
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   description: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#555',
   },
 });

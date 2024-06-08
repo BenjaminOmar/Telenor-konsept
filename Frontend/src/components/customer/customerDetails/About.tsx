@@ -10,16 +10,16 @@ type Props = {
   route: RouteProp<StackParamList, 'CustomerDetails'>;
 };
 
-const Details: React.FC<Props> = ({route}) => {
+const About: React.FC<Props> = ({route}) => {
   const {customer} = route.params;
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
+      {/* <View style={styles.headerContainer}>
         <View style={styles.headerContent}>
           <Text style={styles.headerText}>{customer.name}</Text>
         </View>
-      </View>
+      </View> */}
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <DetailsCard details={customer} />
         <FinancialCard />
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Details;
+export default About;

@@ -39,6 +39,7 @@ const DetailsCard: React.FC<DetailsCardProps> = ({details}) => {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
+    marginVertical: 10,
   },
   title: {
     fontSize: 25,
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 18,
     color: '#333',
   },
   value: {
