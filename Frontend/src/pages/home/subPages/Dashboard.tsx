@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import RegisteredBusinesses from '../components/dashboard/graphs/RegisteredBusinesses';
+import RegisteredBusinesses from '../../../components/dashboard/graphs/RegisteredBusinesses';
 
 const Dashboard = () => {
   return (

@@ -3,11 +3,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Button} from '@rneui/base';
-import CustomerList from '../components/customer/CustomerList';
-import SearchInput from '../components/common/inputs/SearchInput';
-import NewCustomerModal from '../components/customer/NewCustomerModal';
-import CustomerDetails from './CustomerDetails';
-import {CustomerInterface} from '../models/customer/CustomerInterface';
+import CustomerList from '../../../../components/customer/CustomerList';
+import SearchInput from '../../../../components/common/inputs/SearchInput';
+import NewCustomerModal from '../../../../components/customer/NewCustomerModal';
+import CustomerDetails from './details/CustomerDetails';
+import {CustomerInterface} from '../../../../models/customer/CustomerInterface';
 
 type CustomerStackParamList = {
   CustomerList: undefined;
