@@ -1,7 +1,12 @@
 import {View, Text, Pressable, StyleSheet} from 'react-native';
 import React from 'react';
 
-const CustomButton = ({onPress, text}) => {
+interface Props {
+  text: string;
+  onPress: () => void;
+}
+
+const CustomButton: React.FC<Props> = ({onPress, text}) => {
   return (
     <Pressable onPress={onPress} style={styles.buttonContainer}>
       <Text style={styles.buttonText}>{text || 'Knapp'}</Text>

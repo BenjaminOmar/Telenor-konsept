@@ -4,11 +4,11 @@ import {RouteProp, useNavigation} from '@react-navigation/native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useHeader} from '../context/HeaderContext';
-import Tasks from './Tasks';
-import Sales from '../components/customer/customerDetails/Sales';
-import About from '../components/customer/customerDetails/About';
-import {CustomerInterface} from '../models/customer/CustomerInterface';
+import {useHeader} from '../../../../../context/HeaderContext';
+import Tasks from '../../Tasks';
+import Sales from './subPages/Sales';
+import About from './subPages/About';
+import {CustomerInterface} from '../../../../../models/customer/CustomerInterface';
 
 type StackParamList = {
   CustomerDetails: {customer: CustomerInterface};

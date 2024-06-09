@@ -4,9 +4,9 @@ import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import Login from './pages/Login';
 import {AuthProvider, useAuth} from './context/authContext';
-import Home from './pages/Home';
+import Home from './pages/home/Home';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import CustomerDetails from './pages/CustomerDetails';
+import CustomerDetails from './pages/home/subPages/customer/details/CustomerDetails';
 import CustomerList from './components/customer/CustomerList';
 import {StackParamList} from './routing/StackNavigatiorConfig';
 import {HeaderProvider} from './context/HeaderContext';
@@ -26,7 +26,7 @@ const App = () => {
 };
 
 export const Layout = () => {
-  const {authState, onLogout} = useAuth();
+  const {authState} = useAuth();
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>

@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
-import {StackParamList} from '../../../routing/StackNavigatiorConfig';
-import CustomerDetailsDevider from '../CustomerDetailsDevider';
-import DetailsCard from '../cards/DetailsCard';
-import FinancialCard from '../cards/FinancialCard';
+import {StackParamList} from '../../../../../../routing/StackNavigatiorConfig';
+import CustomerDetailsDevider from '../../../../../../components/customer/details/CustomerDetailsDevider';
+import DetailsCard from '../../../../../../components/customer/details/cards/DetailsCard';
+import FinancialCard from '../../../../../../components/customer/details/cards/FinancialCard';
 
 type Props = {
   route: RouteProp<StackParamList, 'CustomerDetails'>;

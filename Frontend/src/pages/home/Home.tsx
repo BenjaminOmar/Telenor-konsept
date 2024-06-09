@@ -1,14 +1,14 @@
 import {View, Text} from 'react-native';
 import React from 'react';
-import Dashboard from './Dashboard';
+import Dashboard from './subPages/Dashboard';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Tasks from './Tasks';
+import Tasks from './subPages/Tasks';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwsome5 from 'react-native-vector-icons/FontAwesome';
-import Header from '../components/header/Header';
-import Customer from './Customer';
+import Header from '../../components/header/Header';
+import Customer from './subPages/customer/Customer';
 
 const Tab = createBottomTabNavigator();
 

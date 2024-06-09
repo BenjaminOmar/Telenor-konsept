@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
-import {CustomerInterface} from '../../../models/customer/CustomerInterface';
+import {CustomerInterface} from '../../../../models/customer/CustomerInterface';
 import CustomerDetailsDevider from '../CustomerDetailsDevider';
 
 interface DetailsCardProps {
