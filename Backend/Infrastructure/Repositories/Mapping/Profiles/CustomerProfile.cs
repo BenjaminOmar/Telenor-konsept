@@ -9,6 +9,7 @@ public class CustomerProfile : Profile
     public CustomerProfile()
     {
         CreateMap<Customer, CustomerListResponseDto>()
-            .ForMember(c => c.CustomerId, c => c.MapFrom(i => i.Id));
+            .ForMember(c => c.CustomerId, c => c.MapFrom(i => i.Id))
+            .ForMember(c => c.Status, c => c.MapFrom(s => s.Status.Name));
     }
 }

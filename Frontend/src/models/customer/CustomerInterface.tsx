@@ -1,4 +1,5 @@
 export interface CustomerInterface {
+  status: string;
   customerId: number;
   customerNumber: number;
   name: string;

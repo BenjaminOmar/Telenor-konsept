@@ -13,6 +13,10 @@ const DetailsCard: React.FC<DetailsCardProps> = ({details}) => {
       <Text style={styles.title}>Kundeinformasjon</Text>
       <CustomerDetailsDevider />
       <View style={styles.infoRow}>
+        <Text style={styles.label}>Status:</Text>
+        <Text style={styles.value}>{details.status}</Text>
+      </View>
+      <View style={styles.infoRow}>
         <Text style={styles.label}>Kundenummer:</Text>
         <Text style={styles.value}>{details.customerNumber}</Text>
       </View>
@@ -58,6 +62,7 @@ const styles = StyleSheet.create({
   },
   value: {
     color: '#555',
+    fontSize: 18,
   },
 });
 
