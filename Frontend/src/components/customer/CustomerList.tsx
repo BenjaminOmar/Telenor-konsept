@@ -1,4 +1,3 @@
-// CustomerList.tsx
 import React, {useEffect, useState} from 'react';
 import {
   View,
@@ -17,6 +16,7 @@ import {CustomerInterface} from '../../models/customer/CustomerInterface';
 
 interface CustomerListProps {
   search: string;
+  refreshKey: number;
 }
 
 type CustomerListNavigationProp = NativeStackNavigationProp<
@@ -24,7 +24,7 @@ type CustomerListNavigationProp = NativeStackNavigationProp<
   'CustomerDetails'
 >;
 
-const CustomerList: React.FC<CustomerListProps> = ({search}) => {
+const CustomerList: React.FC<CustomerListProps> = ({search, refreshKey}) => {
   const [data, setData] = useState<CustomerInterface[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -32,7 +32,7 @@ const CustomerList: React.FC<CustomerListProps> = ({search}) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [refreshKey]);
 
   const fetchData = async () => {
     try {

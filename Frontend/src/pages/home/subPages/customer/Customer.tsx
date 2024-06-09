@@ -19,6 +19,7 @@ const CustomerStack = createNativeStackNavigator<CustomerStackParamList>();
 function Customer() {
   const [modalVisible, setModalVisible] = useState(false);
   const [customerName, setCustomerName] = useState('');
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const handleAddButtonPress = async () => {
     setModalVisible(true);
@@ -26,6 +27,10 @@ function Customer() {
 
   const handleCloseModal = () => {
     setModalVisible(false);
+  };
+
+  const handleCustomerAdded = () => {
+    setRefreshKey(prevKey => prevKey + 1);
   };
 
   return (
@@ -57,10 +62,11 @@ function Customer() {
                   />
                 </View>
               </View>
-              <CustomerList search={customerName} />
+              <CustomerList search={customerName} refreshKey={refreshKey} />
               <NewCustomerModal
                 modalVisible={modalVisible}
                 handleCloseModal={handleCloseModal}
+                onCustomerAdded={handleCustomerAdded}
               />
             </View>
           )}

@@ -15,11 +15,13 @@ import axios from 'axios';
 interface Props {
   modalVisible: boolean;
   handleCloseModal: () => void;
+  onCustomerAdded: () => void;
 }
 
 const NewCustomerModal: React.FC<Props> = ({
   modalVisible,
   handleCloseModal,
+  onCustomerAdded,
 }) => {
   const [name, setName] = useState('');
   const [organizationNr, setOrganizationNr] = useState('');
@@ -68,12 +70,11 @@ const NewCustomerModal: React.FC<Props> = ({
         },
       );
 
-      const data = response.data;
-      console.log('Kunde er laget:', data);
       resetForm();
       handleCloseModal();
+      onCustomerAdded(); // Trigger refresh in CustomerList
     } catch (error) {
-      console.error('Feilet med å lage kunde::', error);
+      console.error('Feilet med å lage kunde:', error);
     }
   };
 
