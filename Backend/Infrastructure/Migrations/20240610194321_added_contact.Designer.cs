@@ -4,6 +4,7 @@ using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240610194321_added_contact")]
+    partial class added_contact
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,7 +78,7 @@ namespace Infrastructure.Migrations
                             Address = "Snarøyveien 30",
                             County = "Fornebu",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(1240),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(2450),
                             Email = "noreply@telenor.com",
                             IsDeleted = false,
                             Name = "Telenor",
@@ -205,12 +208,12 @@ namespace Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("58b65f15-b82c-4882-859f-10c21e9cc453"),
+                            Id = new Guid("a52ed479-c8bf-4f1d-af9a-ecc922d1cd96"),
                             Address = "Snarøyveien 30",
                             BusinessId = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
                             County = "Fornebu",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(4270),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(4960),
                             CustomerNumber = 0,
                             Email = "contact@telenor.com",
                             IsDeleted = false,
@@ -223,12 +226,12 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cd4937c1-a882-40fd-a9e1-7874bd20174c"),
+                            Id = new Guid("8fb2e892-4e18-44e8-a4ef-bf2c84826a6c"),
                             Address = "Forusbeen 50",
                             BusinessId = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
                             County = "Stavanger",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(4280),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(4960),
                             CustomerNumber = 0,
                             Email = "contact@equinor.com",
                             IsDeleted = false,
@@ -241,12 +244,12 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a5fa329e-b771-4715-a23e-7549147d2615"),
+                            Id = new Guid("4405a645-ded6-4405-bf80-3a26df0f2379"),
                             Address = "Drammensveien 260",
                             BusinessId = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
                             County = "Oslo",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(4290),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(4970),
                             CustomerNumber = 0,
                             Email = "contact@hydro.com",
                             IsDeleted = false,
@@ -259,12 +262,12 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d32c0e33-2650-4459-9364-ab3138080e90"),
+                            Id = new Guid("1fdabacd-d880-4122-bda8-20ae0e2f6bb6"),
                             Address = "Drammensveien 131",
                             BusinessId = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
                             County = "Oslo",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(4290),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(4980),
                             CustomerNumber = 0,
                             Email = "contact@yara.com",
                             IsDeleted = false,
@@ -277,12 +280,12 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8a2cd4be-a9cf-4ea4-88ab-7e8efc0daa8a"),
+                            Id = new Guid("a812697d-0efd-48f3-af26-6b48f9e3bc78"),
                             Address = "Dronning Eufemias gate 30",
                             BusinessId = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
                             County = "Oslo",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(4300),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(4980),
                             CustomerNumber = 0,
                             Email = "contact@dnb.no",
                             IsDeleted = false,
@@ -295,12 +298,12 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("41054c80-9eb1-4c0f-90f6-977c6deafa8a"),
+                            Id = new Guid("b125a386-99c2-4d1a-89b6-9c9c17c1d314"),
                             Address = "Skøyen",
                             BusinessId = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
                             County = "Oslo",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(4310),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(4990),
                             CustomerNumber = 0,
                             Email = "contact@orkla.no",
                             IsDeleted = false,
@@ -313,12 +316,12 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a2f801d2-2ea9-44a2-b816-c649f8108584"),
+                            Id = new Guid("f4a547c2-c9ae-4cd3-b1a8-db26fcbb8c24"),
                             Address = "Lakkegata 23",
                             BusinessId = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
                             County = "Oslo",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(4330),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(4990),
                             CustomerNumber = 0,
                             Email = "contact@tine.no",
                             IsDeleted = false,
@@ -331,12 +334,12 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ae173435-f7df-44cb-9d4c-0a344819437a"),
+                            Id = new Guid("f2aec781-0842-4e11-98b4-d0dd332daee4"),
                             Address = "Schweigaards gate 21",
                             BusinessId = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
                             County = "Oslo",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(4340),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(5000),
                             CustomerNumber = 0,
                             Email = "contact@gjensidige.no",
                             IsDeleted = false,
@@ -349,12 +352,12 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1517ea94-0b62-4906-bfd0-8bedae30baff"),
+                            Id = new Guid("ce7865da-01fd-4153-a9e9-be2e61477d10"),
                             Address = "Hamar",
                             BusinessId = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
                             County = "Hedmark",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(4340),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(5000),
                             CustomerNumber = 0,
                             Email = "contact@norsk-tipping.no",
                             IsDeleted = false,
@@ -367,12 +370,12 @@ namespace Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f080d2cb-6fbd-4785-9d46-740cb33d30f7"),
+                            Id = new Guid("700bde08-952d-4a79-93a1-b41c96df884a"),
                             Address = "Hammersborggata 2",
                             BusinessId = new Guid("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
                             County = "Oslo",
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(4350),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(5010),
                             CustomerNumber = 0,
                             Email = "contact@sparebank1.no",
                             IsDeleted = false,
@@ -424,7 +427,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("ccafb929-aa82-4981-96f9-53864b688c89"),
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(2590),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(3620),
                             IsDeleted = false,
                             Name = "User"
                         },
@@ -432,7 +435,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("dd5a13da-11e4-4554-a697-76a4102fd72e"),
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(2590),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(3620),
                             IsDeleted = false,
                             Name = "Admin"
                         });
@@ -474,7 +477,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("728df2fc-4cbc-4945-8deb-b4e500f1898c"),
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(2850),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(3830),
                             IsDeleted = false,
                             Name = "Lead"
                         },
@@ -482,7 +485,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("08bc99d4-87ac-4f56-89e9-af19ab20ab95"),
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(2850),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(3830),
                             IsDeleted = false,
                             Name = "Tatt Kontakt"
                         },
@@ -490,7 +493,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("2b8cc7ea-d47b-4d01-90d9-1581ce380422"),
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(2860),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(3830),
                             IsDeleted = false,
                             Name = "I Prosess"
                         },
@@ -498,7 +501,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("edd4e8aa-d3bd-40f1-8a97-8da40cef43bb"),
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(2860),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(3830),
                             IsDeleted = false,
                             Name = "Kunde"
                         },
@@ -506,7 +509,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = new Guid("60e8fa5e-560d-41f7-b16c-593e5b0cfd3b"),
                             CreatedBy = new Guid("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
-                            CreatedOn = new DateTime(2024, 6, 10, 19, 45, 29, 58, DateTimeKind.Utc).AddTicks(2860),
+                            CreatedOn = new DateTime(2024, 6, 10, 19, 43, 20, 781, DateTimeKind.Utc).AddTicks(3830),
                             IsDeleted = false,
                             Name = "Avslått"
                         });

@@ -12,12 +12,11 @@ public class StatusRepository (DataContext context, IMapper mapper) : BaseReposi
 {
     private readonly DataContext _context = context;
     private readonly IMapper _mapper = mapper;
+    private readonly IQueryable<Status> _statusQuery = context.Statuses.Where(s => !s.IsDeleted);
 
     public async Task<List<StatusListResponseDto>> GetStatusList()
     {
-        IQueryable<Status> statusQuery = _context.Statuses;
-
-        return await statusQuery
+        return await _statusQuery
             .ProjectTo<StatusListResponseDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }

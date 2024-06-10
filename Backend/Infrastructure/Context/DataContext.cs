@@ -10,6 +10,8 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
     public DbSet<Business> Businesses { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Status> Statuses { get; set; }
+    
+    public DbSet<Contact> Contacts { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -109,6 +111,13 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
                     CreatedBy = Guid.Parse("e3611b6c-0380-46bd-b07f-0a3b85a52464"),
                     CreatedOn = DateTime.UtcNow
                 });
+        });
+        
+        modelBuilder.Entity<Contact>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_ContactId");
+            entity.Property(e => e.Id).HasColumnName("ContactId");
+            entity.ToTable("Contact");
         });
 
         modelBuilder.Entity<Customer>(entity =>
@@ -280,8 +289,6 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
                     CreatedOn = DateTime.UtcNow,
                     StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
                 });
-
-
         });
     }
 }

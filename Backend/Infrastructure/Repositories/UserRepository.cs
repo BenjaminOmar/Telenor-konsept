@@ -5,14 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class UserRepository : BaseRepository<User>, IUserRepository
+public class UserRepository(DataContext context) : BaseRepository<User>(context), IUserRepository
 {
-    private readonly DataContext _context;
-
-    public UserRepository(DataContext context) : base(context)
-    {
-        _context = context;
-    }
+    private readonly DataContext _context = context;
+    private readonly IQueryable<User> _userQuery = context.Users.Where(u => !u.IsDeleted);
 
     /// <summary>
     /// Retrieves a user by username asynchronously.
@@ -21,7 +17,7 @@ public class UserRepository : BaseRepository<User>, IUserRepository
     /// <returns>bool</returns>
     public Task<bool> CheckUserExists(string username)
     {
-        return _context.Users.AnyAsync(x => x.Username == username);
+        return _userQuery.AnyAsync(x => x.Username == username);
     }
 
     /// <summary>
@@ -31,7 +27,7 @@ public class UserRepository : BaseRepository<User>, IUserRepository
     /// <returns>A User if found; otherwise, null.</returns>
     public async Task<User?> GetUser(string username)
     {
-        return await _context.Users
+        return await _userQuery
             .Include(r => r.Role)
             .FirstOrDefaultAsync(x => x.Username == username);
     }
