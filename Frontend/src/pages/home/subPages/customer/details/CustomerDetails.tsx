@@ -9,6 +9,7 @@ import Tasks from '../../Tasks';
 import Sales from './subPages/Sales';
 import About from './subPages/About';
 import {CustomerInterface} from '../../../../../models/customer/CustomerInterface';
+import Contacts from './subPages/Contacts';
 
 type StackParamList = {
   CustomerDetails: {customer: CustomerInterface};
@@ -61,6 +62,7 @@ const CustomerDetails: React.FC<Props> = ({route}) => {
         initialParams={{customer}}
         options={{title: 'Om'}}
       />
+      <Tab.Screen name="Kontakt" component={Contacts} />
       <Tab.Screen name="Oppgaver" component={Tasks} />
       <Tab.Screen name="Salg" component={Sales} />
     </Tab.Navigator>
