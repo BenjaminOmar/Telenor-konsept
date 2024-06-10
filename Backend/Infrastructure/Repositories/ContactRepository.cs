@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper.QueryableExtensions;
+using Domain.DTOs.Contact;
 
 namespace Infrastructure.Repositories;
 
@@ -14,12 +15,13 @@ public class ContactRepository(DataContext context, IMapper _mapper) : BaseRepos
     private readonly DataContext _context = context;
     private readonly IMapper _mapper = _mapper;
     private readonly IQueryable<Contact> _contactsQuery = context.Contacts.Where(c => !c.IsDeleted);
-
-    public async Task<ContactsResponseDto> GetContactList(Guid customerId)
+    
+    
+    public async Task<List<ContactListResponseDto>> GetContactList(Guid customerId)
     {
         return await _contactsQuery
             .Where(c => c.CustomerId == customerId)
-            .ProjectTo<ContactsResponseDto>(_mapper.ConfigurationProvider)
+            .ProjectTo<ContactListResponseDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }
 }
