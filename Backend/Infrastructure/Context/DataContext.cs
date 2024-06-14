@@ -44,6 +44,22 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             entity.HasIndex(u => u.Username).IsUnique();
 
             entity.Property(e => e.RoleId).HasColumnName("RoleId").IsRequired();
+
+            entity.HasData(
+                new User
+                {
+                    Id = Guid.NewGuid(),
+                    Username = "benjamin12345",
+                    Name = "Benjamin",
+                    Password = "$2a$11$EDzi.7kQQIPs4DiQQnImPO4WNYL6F6TqG8YBrm07ZPom3.6cCadMO",
+                    PhoneNumber = "12345678",
+                    Email = "benjamin@gmail.com",
+                    RoleId = Guid.Parse("ccafb929-aa82-4981-96f9-53864b688c89"),
+                    BusinessId = Guid.Parse("e3ead016-1f61-4dc9-b0f1-1f4ee2f27c16"),
+                    CreatedBy = Guid.NewGuid(),
+                    CreatedOn = DateTime.UtcNow,
+                }
+            );
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -113,13 +129,6 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
                 });
         });
         
-        modelBuilder.Entity<Contact>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK_ContactId");
-            entity.Property(e => e.Id).HasColumnName("ContactId");
-            entity.ToTable("Contact");
-        });
-
         modelBuilder.Entity<Customer>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK_CustomerId");
@@ -131,7 +140,7 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
             entity.HasData(
                 new Customer
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("28537f7f-6609-4fa3-b4a2-f0893ac238e2"),
                     Name = "Telenor",
                     IsPrivateCustomer = false,
                     OrganizationNr = 911066905,
@@ -289,6 +298,27 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
                     CreatedOn = DateTime.UtcNow,
                     StatusId = Guid.Parse("728df2fc-4cbc-4945-8deb-b4e500f1898c")
                 });
+        });
+        
+        modelBuilder.Entity<Contact>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_ContactId");
+            entity.Property(e => e.Id).HasColumnName("ContactId");
+            entity.ToTable("Contact");
+
+            entity.HasData(
+                new Contact
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Test kontakt",
+                    PhoneNumber = "12345678",
+                    Email = "Test@Test.no",
+                    Position = "Mellomleder",
+                    CustomerId = Guid.Parse("28537f7f-6609-4fa3-b4a2-f0893ac238e2"),
+                    CreatedBy = Guid.NewGuid(),
+                    CreatedOn = DateTime.UtcNow
+                }
+            );
         });
     }
 }
