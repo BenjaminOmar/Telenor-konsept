@@ -1,3 +1,4 @@
+using Domain.DTOs.Contact;
 using Domain.Interfaces.Services.Contact;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,27 @@ public class ContractController(IContactService contactService) : ControllerBase
     public async Task<IActionResult> GetContacts(Guid customerId)
     {
         var result = await _contactService.GetContactList(customerId);
+        
+        if (!result.IsSuccess)
+        {
+            return result.ErrorCode switch
+            {
+                404 => NotFound(result),
+                409 => Conflict(result),
+                400 => BadRequest(result),
+                401 => Unauthorized(result),
+                _ => StatusCode(500, result)
+            };
+        }
+        
+        return Ok(result);
+    }
+
+    //[Authorize]
+    [HttpPost]
+    public async Task<IActionResult> CreateContact([FromBody] CreateContactRequestDto createContactRequestDto)
+    {
+        var result = await _contactService.CreateContact(createContactRequestDto);
         
         if (!result.IsSuccess)
         {

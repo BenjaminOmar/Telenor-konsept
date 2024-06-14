@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.DTOs.Contact;
 
-public class ContactListResponseDto
+public class ContactResponseDto
 {
     public Guid ContactId { get; set; }
     

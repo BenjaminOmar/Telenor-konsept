@@ -2,10 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.DTOs.Contact;
 
-public class ContactListResponseDto
+public class CreateContactRequestDto
 {
-    public Guid ContactId { get; set; }
-    
     public string Name { get; set; } = null!;
     
     [EmailAddress]
@@ -14,4 +12,6 @@ public class ContactListResponseDto
     public string? PhoneNumber { get; set; }
     
     public string? Position { get; set; }
+    
+    public Guid CustomerId { get; set; }
 }
