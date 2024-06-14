@@ -11,7 +11,7 @@ public class ContractController(IContactService contactService) : ControllerBase
 {
     private readonly IContactService _contactService = contactService;
 
-    //[Authorize]
+    [Authorize]
     [HttpGet]
     [Route("{customerId}")]
     public async Task<IActionResult> GetContacts(Guid customerId)
@@ -33,7 +33,7 @@ public class ContractController(IContactService contactService) : ControllerBase
         return Ok(result);
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> CreateContact([FromBody] CreateContactRequestDto createContactRequestDto)
     {
