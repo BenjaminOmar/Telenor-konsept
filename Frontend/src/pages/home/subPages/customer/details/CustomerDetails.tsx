@@ -62,7 +62,11 @@ const CustomerDetails: React.FC<Props> = ({route}) => {
         initialParams={{customer}}
         options={{title: 'Om'}}
       />
-      <Tab.Screen name="Kontakt" component={Contacts} />
+      <Tab.Screen
+        name="Kontakt"
+        component={Contacts}
+        initialParams={{customer}}
+      />
       <Tab.Screen name="Oppgaver" component={Tasks} />
       <Tab.Screen name="Salg" component={Sales} />
     </Tab.Navigator>
