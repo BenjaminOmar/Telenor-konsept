@@ -86,6 +86,7 @@ function Customer() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 10,
   },
   buttonContainer: {
     marginRight: 20,
