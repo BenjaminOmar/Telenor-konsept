@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginRight: 20,
-    marginBottom: 5,
   },
   customerHeader: {
     flexDirection: 'row',
