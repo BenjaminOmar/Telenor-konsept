@@ -7,6 +7,7 @@ import {Button} from '@rneui/base';
 import ContactList from '../../../../../../components/contact/ContactList';
 import {RouteProp} from '@react-navigation/native';
 import {StackParamList} from '../../../../../../routing/StackNavigatiorConfig';
+import NewContactModal from '../../../../../../components/contact/NewContactModal';
 
 type Props = {
   route: RouteProp<StackParamList, 'CustomerDetails'>;
@@ -20,7 +21,6 @@ const Contacts: React.FC<Props> = ({route}) => {
 
   const handleAddButtonPress = async () => {
     setModalVisible(true);
-    console.log(customer);
   };
 
   const handleCloseModal = () => {
@@ -58,6 +58,12 @@ const Contacts: React.FC<Props> = ({route}) => {
         customerId={customer.customerId.toString()}
         search={contactName}
         refreshKey={refreshKey}
+      />
+      <NewContactModal
+        customerId={customer.customerId.toString()}
+        modalVisible={modalVisible}
+        handleCloseModal={handleCloseModal}
+        onCustomerAdded={handleContactAdded}
       />
     </View>
   );
