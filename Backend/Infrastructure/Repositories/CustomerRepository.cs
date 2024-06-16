@@ -21,7 +21,7 @@ public class CustomerRepository(DataContext context, IMapper mapper, ICurrentUse
     {
         return await _customerQuery
             .Where(c => c.BusinessId == currentUserService.BusinessId)
-            .OrderByDescending(c => c.CreatedOn)
+            .OrderBy(c => c.CreatedOn)
             .ProjectTo<CustomerListResponseDto>(mapper.ConfigurationProvider)
             .ToListAsync();
     }

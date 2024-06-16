@@ -18,6 +18,7 @@ public class ContactRepository(DataContext context, IMapper mapper) : BaseReposi
     {
         return await _contactsQuery
             .Where(c => c.CustomerId == customerId)
+            .OrderBy(c => c.CreatedOn)
             .ProjectTo<ContactListResponseDto>(mapper.ConfigurationProvider)
             .ToListAsync();
     }

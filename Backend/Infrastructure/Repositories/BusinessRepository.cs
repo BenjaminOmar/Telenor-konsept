@@ -16,6 +16,7 @@ public class BusinessRepository(DataContext context, IMapper _mapper) : BaseRepo
     public async Task<List<BusinessListResultDto>> GetBusinessList()
     {
         return await _businessesQuery
+            .OrderBy(c => c.CreatedOn)
             .ProjectTo<BusinessListResultDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }

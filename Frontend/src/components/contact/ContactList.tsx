@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import {ContactInterface} from '../../models/contact/ContactInterface';
+import ViewContactModal from './ViewContactModal'; // import the new modal component
 
 interface ContactListProps {
   customerId: string;
@@ -25,6 +26,9 @@ const ContactList: React.FC<ContactListProps> = ({
   const [data, setData] = useState<ContactInterface[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedContact, setSelectedContact] =
+    useState<ContactInterface | null>(null);
 
   useEffect(() => {
     fetchData();
@@ -50,10 +54,15 @@ const ContactList: React.FC<ContactListProps> = ({
     fetchData();
   };
 
+  const handleContactPress = (contact: ContactInterface) => {
+    setSelectedContact(contact);
+    setModalVisible(true);
+  };
+
   const renderItem = ({item}: {item: ContactInterface}) => (
     <TouchableOpacity
       style={styles.itemContainer}
-      onPress={() => console.log('test')}>
+      onPress={() => handleContactPress(item)}>
       <Text style={styles.itemText}>{item.name}</Text>
     </TouchableOpacity>
   );
@@ -71,15 +80,22 @@ const ContactList: React.FC<ContactListProps> = ({
   );
 
   return (
-    <FlatList
-      data={filteredData}
-      keyExtractor={item => item.contactId.toString()}
-      renderItem={renderItem}
-      contentContainerStyle={styles.listContainer}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
-      }
-    />
+    <View style={styles.mainContainer}>
+      <FlatList
+        data={filteredData}
+        keyExtractor={item => item.contactId.toString()}
+        renderItem={renderItem}
+        contentContainerStyle={styles.listContainer}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+        }
+      />
+      <ViewContactModal
+        contact={selectedContact}
+        modalVisible={modalVisible}
+        handleCloseModal={() => setModalVisible(false)}
+      />
+    </View>
   );
 };
 
