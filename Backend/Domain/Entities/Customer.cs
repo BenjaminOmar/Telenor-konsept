@@ -27,4 +27,6 @@ public class Customer : BaseEntity
     public Status Status { get; set; } = null!;
     
     public Business Business { get; set; } = null!;
+    
+    public ICollection<Contact> Contacts { get; set; } = [];
 }

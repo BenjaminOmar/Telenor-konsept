@@ -11,12 +11,12 @@ namespace Infrastructure.Repositories;
 public class BusinessRepository(DataContext context, IMapper _mapper) : BaseRepository<Business>(context), IBusinessRepository
 {
     private readonly DataContext _context = context;
+    private readonly IQueryable<Business> _businessesQuery = context.Businesses.Where(b => !b.IsDeleted);
 
     public async Task<List<BusinessListResultDto>> GetBusinessList()
     {
-        IQueryable<Business> businessQuery = _context.Businesses;
-        
-        return await businessQuery
+        return await _businessesQuery
+            .OrderBy(c => c.CreatedOn)
             .ProjectTo<BusinessListResultDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
     }

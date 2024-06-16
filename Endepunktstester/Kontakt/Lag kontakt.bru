@@ -1,0 +1,21 @@
+meta {
+  name: Lag kontakt
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/api/contact
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Benjamin",
+    "email": "user@example.com",
+    "phoneNumber": "232132",
+    "position": "asdasdas",
+    "customerId": "28537f7f-6609-4fa3-b4a2-f0893ac238e2"
+  }
+}

@@ -1,8 +1,10 @@
 using Application.Services.Authentication;
 using Application.Services.Business;
+using Application.Services.Contact;
 using Application.Services.Customer;
 using Application.Services.Status;
 using Application.Services.UserServices;
+using Domain.Interfaces.Services.Contact;
 using Domain.Interfaces.Services.Customer;
 using Domain.Interfaces.Services.Status;
 using Domain.Interfaces.Services.User;
@@ -28,6 +30,7 @@ namespace Application
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IStatusService, StatusService>();
             services.AddScoped<IBrregService, BrregService>();
+            services.AddScoped<IContactService, ContactService>();
             return services;
         }
     }

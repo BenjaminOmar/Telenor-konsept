@@ -84,12 +84,12 @@ namespace Application.Services.Authentication
 
             if (!validPassword)
             {
-                return Result<AuthenticationResultDto>.Failure("Bruker ikke funnet", 401);
+                return Result<AuthenticationResultDto>.Failure("Bruker ikke funnet", 404);
             }
 
             if (user.IsDeleted)
             {
-                return Result<AuthenticationResultDto>.Failure("Brukeren er slettet", 401);
+                return Result<AuthenticationResultDto>.Failure("Brukeren er slettet", 404);
             }
 
             var jwt = CreateJwt(user);

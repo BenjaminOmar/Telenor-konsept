@@ -4,8 +4,6 @@ using Domain.Interfaces.Repositories;
 using Infrastructure.Configuration;
 using Infrastructure.Context;
 using Infrastructure.Repositories;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +39,7 @@ namespace Infrastructure
             services.AddScoped<IBusinessRepository, BusinessRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IStatusRepository, StatusRepository>();
+            services.AddScoped<IContactRepository, ContactRepository>();
             
             return services;
         }

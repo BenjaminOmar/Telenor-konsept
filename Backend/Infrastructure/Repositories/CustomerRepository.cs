@@ -14,44 +14,36 @@ namespace Infrastructure.Repositories;
 public class CustomerRepository(DataContext context, IMapper mapper, ICurrentUserService currentUserService, IConfiguration contConfiguration) : BaseRepository<Customer>(context), ICustomerRepository
 {
     private readonly DataContext _context = context;
-    private readonly IMapper _mapper = mapper;
-    private readonly ICurrentUserService _currentUserService = currentUserService;
-    private readonly IConfiguration _configuration = contConfiguration;
     private static readonly HttpClient HttpClient = new();
+    private readonly IQueryable<Customer> _customerQuery = context.Customers.Where(c => !c.IsDeleted);
 
     public async Task<List<CustomerListResponseDto>> GetCustomerList()
     {
-        IQueryable<Customer> customerQuery = _context.Customers;
-
-        return await customerQuery
-            .Where(c => c.BusinessId == _currentUserService.BusinessId)
-            .OrderByDescending(c => c.CreatedOn)
-            .ProjectTo<CustomerListResponseDto>(_mapper.ConfigurationProvider)
+        return await _customerQuery
+            .Where(c => c.BusinessId == currentUserService.BusinessId)
+            .OrderBy(c => c.CreatedOn)
+            .ProjectTo<CustomerListResponseDto>(mapper.ConfigurationProvider)
             .ToListAsync();
     }
 
     public async Task<bool> CheckCustomerNameExists(string customerName)
     {
-        IQueryable<Customer> customerQuery = _context.Customers;
-
-        return await customerQuery
-            .Where(c => c.BusinessId == _currentUserService.BusinessId)
+        return await _customerQuery
+            .Where(c => c.BusinessId == currentUserService.BusinessId)
             .AnyAsync(c => c.Name == customerName);
 
     }
     
     public async Task<bool> CheckOrgNrExists(int organizationNr)
     {
-        IQueryable<Customer> customerQuery = _context.Customers;
-
-        return await customerQuery
-            .Where(c => c.BusinessId == _currentUserService.BusinessId)
+        return await _customerQuery
+            .Where(c => c.BusinessId == currentUserService.BusinessId)
             .AnyAsync(c => c.OrganizationNr == organizationNr);
     }
 
     public async Task<List<BrregResponseDto>> GetBrregCompanyInformation(string? name, string? organizationNumber)
     {
-        var baseUrl = _configuration.GetValue<string>("brreg:BasePath")!;
+        var baseUrl = contConfiguration.GetValue<string>("brreg:BasePath")!;
         var queryParameters = new List<string>();
 
         if (!string.IsNullOrEmpty(name))
@@ -65,7 +57,7 @@ public class CustomerRepository(DataContext context, IMapper mapper, ICurrentUse
     
         var url = $"{baseUrl}?{string.Join("&", queryParameters)}";
         var request = new HttpRequestMessage(HttpMethod.Get, url);
-        request.Headers.Add("Accept", _configuration.GetValue<string>("brreg:RequestHeaders")!);
+        request.Headers.Add("Accept", contConfiguration.GetValue<string>("brreg:RequestHeaders")!);
 
         var response = await HttpClient.SendAsync(request);
         response.EnsureSuccessStatusCode();

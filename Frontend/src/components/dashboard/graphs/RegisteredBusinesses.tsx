@@ -3,14 +3,26 @@ import React from 'react';
 
 const RegisteredBusinesses = () => {
   return (
-    <View style={styles.card}>
-      <Text style={styles.title}>Nye bedrifter</Text>
-      <Text>
-        Her kommer informasjon om hvordan bedriften gjør det økonomisk. Dette er
-        blant annet likviditetsgrad, lønnsomhet og soliditet. Her kan det brukes
-        api som henter data fra regnskapssystemet, brreg eller feks proff.no.
-      </Text>
-    </View>
+    <>
+      <View style={styles.card}>
+        <Text style={styles.title}>Graf over bedrifter</Text>
+        <Text>
+          Her kan vi ha en graf som viser statestikk over registrerte bedrifter.
+          Dette kan feks være en bar chart som viser leads vs i prosess vs
+          kunder
+        </Text>
+      </View>
+      <View style={styles.card}>
+        <Text style={styles.title}>Vise bedriftens fortjeneste</Text>
+        <Text>Vise tallet for hvor mye bedriften har solgt for</Text>
+      </View>
+      <View style={styles.card}>
+        <Text style={styles.title}>Vise antallet utførte oppgaver</Text>
+        <Text>
+          Vise tallet for hvor mange oppgaver som er utført hos bedriften
+        </Text>
+      </View>
+    </>
   );
 };
 
