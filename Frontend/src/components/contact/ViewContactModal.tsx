@@ -6,6 +6,7 @@ import {
   Text,
   TouchableWithoutFeedback,
   ScrollView,
+  Linking,
 } from 'react-native';
 import {Button} from '@rneui/base';
 
@@ -26,6 +27,14 @@ const ViewContactModal: React.FC<Props> = ({
   handleCloseModal,
 }) => {
   if (!contact) return null;
+
+  const handlePhonePress = (phoneNumber: string) => {
+    Linking.openURL(`tel:${phoneNumber}`);
+  };
+
+  const handleEmailPress = (email: string) => {
+    Linking.openURL(`mailto:${email}`);
+  };
 
   return (
     <Modal
@@ -50,11 +59,21 @@ const ViewContactModal: React.FC<Props> = ({
                   </View>
                   <View style={styles.infoRow}>
                     <Text style={styles.label}>Telefonnummer:</Text>
-                    <Text style={styles.value}>{contact.phoneNumber}</Text>
+                    <TouchableWithoutFeedback
+                      onPress={() => handlePhonePress(contact.phoneNumber)}>
+                      <Text style={[styles.value, styles.link]}>
+                        {contact.phoneNumber}
+                      </Text>
+                    </TouchableWithoutFeedback>
                   </View>
                   <View style={styles.infoRow}>
                     <Text style={styles.label}>Epost:</Text>
-                    <Text style={styles.value}>{contact.email}</Text>
+                    <TouchableWithoutFeedback
+                      onPress={() => handleEmailPress(contact.email)}>
+                      <Text style={[styles.value, styles.link]}>
+                        {contact.email}
+                      </Text>
+                    </TouchableWithoutFeedback>
                   </View>
                   <View style={styles.infoRow}>
                     <Text style={styles.label}>Posisjon:</Text>
@@ -135,6 +154,10 @@ const styles = StyleSheet.create({
   value: {
     color: '#555',
     fontSize: 18,
+  },
+  link: {
+    color: '#00ACE7',
+    textDecorationLine: 'underline',
   },
   buttonContainer: {
     alignSelf: 'flex-end',
